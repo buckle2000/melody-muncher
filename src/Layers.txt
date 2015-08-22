@@ -1,5 +1,10 @@
 0 Player
 
-100 Level background
+100 Level foreground
 
 200 Player background
+
+500 Level scrollground 1 (faster)
+600 Level scrollground 2 (slower)
+
+1000 Level background
