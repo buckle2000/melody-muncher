@@ -15,7 +15,7 @@ class Song
 	var _bpm:Float;
 	var _sfx:Sfx;
 	var _beatPixelLength:Float;
-	var _enemies:Array<Enemy>;
+	var _enemies:Array<Enemy> = new Array<Enemy>();
 	
 	private static var _level1Left:String =
 	"........ 1.1..... 1.1.....";
@@ -29,6 +29,8 @@ class Song
 	private static var _levelsBeatDivision:Array<Float> = [2.0];
 	private static var _levelBpms:Array<Float> = [135.0];
 	private static var _levelBeatPixelLengths:Array<Float> = [100.0];
+	
+	private static inline var kBounceTime:Float = 0.1;
 	
 	public static var CurrentSong(get, null):Song;
 	static function get_CurrentSong():Song
@@ -70,6 +72,7 @@ class Song
 			case "1":
 				var enemy:BasicEnemy = MainScene.Instance.create(BasicEnemy);
 				enemy.Reset(beat, left);
+				_enemies.push(enemy);
 			default:
 				trace("unknown char" + char);
 		}
@@ -118,5 +121,10 @@ class Song
 	public function CurrentBeat():Float
 	{
 		return SecondsToBeats(CurrentTime());
+	}
+	
+	public function ShouldBounce():Bool
+	{
+		return CurrentBeat() % 1.0 < kBounceTime || CurrentBeat() % 1.0 > 1.0 - kBounceTime;
 	}
 }
