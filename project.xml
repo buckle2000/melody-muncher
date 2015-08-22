@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<meta title="Melody Muncher" package="com.cocoamoss" version="1.0.0" company="Cocoa Moss" />
+
+ 	<app file="Main" main="Main" path="bin" />
+
+	<window fps="60" background="0x333333" />
+	<window width="1000" height="600" resizable="false" />
+	<window fullscreen="true" if="mobile" />
+	<window orientation="landscape" antialiasing="0" />
+
+	<source path="src" />
+
+	<haxelib name="openfl" />
+	<haxelib name="HaxePunk" />
+
+	<assets path="assets/img" rename="img" include="*.png|*.jpg" />
+	<assets path="assets/sfx" rename="sfx" include="*.mp3" type="sound" if="flash"/>
+	<assets path="assets/sfx" rename="sfx" include="*.ogg" type="sound" unless="flash"/>
+	<assets path="assets/fnt" rename="fnt" include="*.ttf" />
+
+	<icon path="assets/HaxePunk.svg" />
+</project>
