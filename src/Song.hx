@@ -18,13 +18,17 @@ class Song
 	var _enemies:Array<Enemy>;
 	
 	private static var _level1Left:String =
-	".... X.X. ....";
+	".... 1.1. ....";
 	private static var _level1Right:String =
-	".... .... X.X.";
+	".... .... 1.1.";
 	
 	private static var _levelsLeft:Array<String> = [_level1Left];
 	private static var _levelsRight:Array<String> = [_level1Right];
-
+	
+	private static var _levelSfxs:Array<Sfx> = [Sound.Load("sfx/level1")];
+	private static var _levelsBeatDivision:Array<Float> = [4.0];
+	private static var _levelBpms:Array<Float> = [120.0];
+	private static var _levelBeatPixelLengths:Array<Float> = [100.0];
 	
 	public static var CurrentSong(get, null):Song;
 	static function get_CurrentSong():Song
@@ -39,17 +43,35 @@ class Song
 	public static function LoadLevel(level:Int):Song
 	{
 		var result:Song = new Song();
-		result.Load(_levelsLeft[level - 1], _levelsRight[level - 1]);
+		result.Load(_levelsLeft[level - 1], _levelsRight[level - 1], _levelsBeatDivision[level - 1]);
+		result._sfx = _levelSfxs[level - 1];
+		result._bpm = _levelBpms[level - 1];
+		result._beatPixelLength = _levelBeatPixelLengths[level - 1];
 		return result;
 	}
 	
-	private function Load(leftText:String, rightText:String)
+	private function Load(leftText:String, rightText:String, beatDivision:Float)
 	{
 		StringTools.replace(leftText, " ", "");
 		StringTools.replace(rightText, " ", "");
 		
 		for (i in 0...leftText.length) {
-			leftText.charAt(i);
+			var beat = i / beatDivision;
+			ProcessChar(leftText.charAt(i), beat, true);
+			ProcessChar(rightText.charAt(i), beat, false);
+		}
+	}
+	
+	private function ProcessChar(char:String, beat:Float, left:Bool)
+	{
+		switch(char) {
+			case ".":
+				// Do nothing.
+			case "1":
+				var enemy:BasicEnemy = MainScene.Instance.create(BasicEnemy);
+				enemy.Reset(beat, left);
+			default:
+				trace("unknown char" + char);
 		}
 	}
 	

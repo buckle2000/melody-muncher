@@ -11,8 +11,15 @@ class BasicEnemy extends Enemy
 {
 	private var _spritemap:Spritemap = new Spritemap("img/player.png", 20, 20);
 
-	public function new(x:Float, y:Float)
+	public function new()
 	{
-		super(x, y, _spritemap);
+		super(_spritemap);
+	}
+	
+	override public function Reset(beat:Float, left:Bool)
+	{
+		// TODO: Randomization, etc.
+		
+		super.Reset(beat, left);
 	}
 }

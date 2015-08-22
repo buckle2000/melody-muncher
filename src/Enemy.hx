@@ -13,9 +13,13 @@ class Enemy extends Entity
 	public var Beat:Float;
 	public var Left:Bool;
 	
-	public function new(x:Float, y:Float, graphic:Graphic, beat:Float, left:Bool)
+	public function new(graphic:Graphic)
 	{
-		super(x, y, graphic);
+		super(0, 0, graphic);
+	}
+	
+	public function Reset(beat:Float, left:Bool)
+	{
 		Beat = beat;
 		Left = left;
 	}
