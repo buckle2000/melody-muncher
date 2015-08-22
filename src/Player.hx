@@ -115,14 +115,33 @@ class Player extends Entity
 	{
 		_spritemap.play("attackright");
 		_spritemap.flipped = true;
+		
+		var enemy:Enemy = Song.CurrentSong.EnemyToHit(true);
+		if (enemy != null) {
+			enemy.Hit();
+		}
 	}
 	private function AttackRight():Void
 	{
 		_spritemap.play("attackright");
 		_spritemap.flipped = false;
+
+		var enemy:Enemy = Song.CurrentSong.EnemyToHit(false);
+		if (enemy != null) {
+			enemy.Hit();
+		}
 	}
 	private function AttackBoth():Void
 	{
 		_spritemap.play("attackboth");
+		
+		var enemyLeft:Enemy = Song.CurrentSong.EnemyToHit(true);
+		if (enemyLeft != null) {
+			enemyLeft.Hit();
+		}
+		var enemyRight:Enemy = Song.CurrentSong.EnemyToHit(false);
+		if (enemyRight != null) {
+			enemyRight.Hit();
+		}
 	}
 }

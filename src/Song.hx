@@ -10,12 +10,22 @@ import StringTools;
 class Song
 {
 	public static inline var kMusicVolume:Float = 0.8;
+	
+	// TODO: lag calibration in menu
 	public static var LagCalibration:Float = 0.01;
+	
+	// For one side of the timing window.
+	public static inline var kDefaultTimingWindow:Float = 0.1;
+	
+	private var _timingWindow:Float;
 	
 	var _bpm:Float;
 	var _sfx:Sfx;
 	var _beatPixelLength:Float;
-	public var Enemies:Array<Enemy> = new Array<Enemy>();
+
+	// Sorted by time.
+	public var LeftEnemies:Array<Enemy> = new Array<Enemy>();
+	public var RightEnemies:Array<Enemy> = new Array<Enemy>();
 	
 	private static var _level1Left:String =
 	"........ 1.1..... 1.1.....";
@@ -49,6 +59,14 @@ class Song
 		result._sfx = Sound.Load(_levelSfxNames[level - 1]);
 		result._bpm = _levelBpms[level - 1];
 		result._beatPixelLength = _levelBeatPixelLengths[level - 1];
+
+		// Each side of timing window can't be larger than a quarter-beat length.
+		result._timingWindow = kDefaultTimingWindow;
+		var quarterBeat = result.BeatsToSeconds(0.25);
+		if (result._timingWindow > quarterBeat) {
+			result._timingWindow = quarterBeat;
+			trace("timing window too large for this song, reduced");
+		}
 		return result;
 	}
 	
@@ -72,10 +90,15 @@ class Song
 			case "1":
 				var enemy:BasicEnemy = MainScene.Instance.create(BasicEnemy);
 				enemy.Reset(beat, left);
-				Enemies.push(enemy);
+				EnemyList(left).push(enemy);
 			default:
 				trace("unknown char" + char);
 		}
+	}
+	
+	public function EnemyList(left:Bool):Array<Enemy>
+	{
+		return left ? LeftEnemies : RightEnemies;
 	}
 	
 	public function Start()
@@ -130,5 +153,27 @@ class Song
 	public function ShouldBounce():Bool
 	{
 		return CurrentBeat() % 1.0 < kBounceTime || CurrentBeat() % 1.0 > 1.0 - kBounceTime;
+	}
+	
+	public function EnemyToHit(left:Bool):Enemy
+	{
+		var enemyList = EnemyList(left);
+		
+		for (enemy in enemyList) {
+			var beatsLeft = enemy.BeatsLeft();
+			// Skip if this enemy is already past.
+			if (beatsLeft < -_timingWindow) {
+				continue;
+			}
+			
+			// Return the enemy if it's withing the timing window.
+			if (beatsLeft <= _timingWindow) {
+				return enemy;
+			}
+			
+			// Otherwise stop, don't have to check any further enemies.
+			break;
+		}
+		return null;
 	}
 }

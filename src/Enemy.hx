@@ -39,7 +39,7 @@ class Enemy extends Entity
 		super.update();
 	}
 	
-	private function BeatsLeft():Float
+	public function BeatsLeft():Float
 	{
 		return Beat - Song.CurrentSong.CurrentBeat();
 	}
@@ -57,6 +57,6 @@ class Enemy extends Entity
 	public function Destroy():Void
 	{
 		MainScene.Instance.recycle(this);
-		Song.CurrentSong.Enemies.remove(this);
+		Song.CurrentSong.EnemyList(Left).remove(this);
 	}
 }
