@@ -2,7 +2,7 @@
 <project>
 	<meta title="Melody Muncher" package="com.cocoamoss" version="1.0.0" company="Cocoa Moss" />
 
- 	<app file="Main" main="Main" path="bin" />
+ 	<app file="MelodyMuncher" main="Main" path="bin" />
 
 	<window fps="60" background="0x333333" />
 	<window width="1000" height="600" resizable="false" />

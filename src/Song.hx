@@ -12,10 +12,10 @@ class Song
 	public static inline var kMusicVolume:Float = 0.8;
 	
 	// TODO: lag calibration in menu
-	public static var LagCalibration:Float = 0.01;
+	public static var LagCalibration:Float = 0.075;
 	
 	// For one side of the timing window.
-	public static inline var kDefaultTimingWindow:Float = 0.1;
+	public static inline var kDefaultTimingWindow:Float = 0.2;
 	
 	private var _timingWindow:Float;
 	
@@ -28,17 +28,23 @@ class Song
 	public var RightEnemies:Array<Enemy> = new Array<Enemy>();
 	
 	private static var _level1Left:String =
-	"........ 1.1..... 1.1.....";
+"........ ........ ........ ........" +
+"1...1... 1...1... ........ ........ 1...1... 1...1... ........ ........" +
+"1.1..... 1.1..... ........ ........ 1.1..... 1.1..... ........ ........" +
+"1...1... ....1... 1.1..... ..1..... 1.1..... 1....... ..1...1. ........";
 	private static var _level1Right:String =
-	"........ ....1.1. ....1.1.";
+"........ ........ ........ ........" +
+"........ ........ 1...1... 1...1... ........ ........ 1...1... 1...1..." +
+"........ ........ 1.1..... 1.1..... ........ ........ 1.1..... 1.1....." +
+"..1...1. 1.1..... ....1.1. 1...1.1. ....1.1. ..1.1... 1...1... 1.......";
 	
 	private static var _levelsLeft:Array<String> = [_level1Left];
 	private static var _levelsRight:Array<String> = [_level1Right];
 	
 	private static var _levelSfxNames:Array<String> = ["sfx/level1"];
 	private static var _levelsBeatDivision:Array<Float> = [2.0];
-	private static var _levelBpms:Array<Float> = [135.0];
-	private static var _levelBeatPixelLengths:Array<Float> = [100.0];
+	private static var _levelBpms:Array<Float> = [125.0];
+	private static var _levelBeatPixelLengths:Array<Float> = [80.0];
 	
 	private static inline var kBounceTime:Float = 0.1;
 	
@@ -63,10 +69,10 @@ class Song
 		// Each side of timing window can't be larger than a quarter-beat length.
 		result._timingWindow = kDefaultTimingWindow;
 		var quarterBeat = result.BeatsToSeconds(0.25);
-		if (result._timingWindow > quarterBeat) {
-			result._timingWindow = quarterBeat;
-			trace("timing window too large for this song, reduced");
-		}
+		//if (result._timingWindow > quarterBeat) {
+		//	trace("timing window too large for this song, reduced from " + result._timingWindow + " to " + quarterBeat);
+		//	result._timingWindow = quarterBeat;
+		//}
 		return result;
 	}
 	
