@@ -1,3 +1,4 @@
+import com.haxepunk.HXP;
 import com.haxepunk.Scene;
 
 class MainScene extends Scene
@@ -9,12 +10,24 @@ class MainScene extends Scene
 	public static var LeftPosition(get, null):Float;
 	static function get_LeftPosition()
 	{
-		return 200;
+		return PlayerX - 20;
 	}
 	public static var RightPosition(get, null):Float;
 	static function get_RightPosition()
 	{
-		return 400;
+		return PlayerX + 20;
+	}
+	
+	public static var FloorY(get, null):Float;
+	static function get_FloorY()
+	{
+		return 150;
+	}
+	
+	public static var PlayerX(get, null):Float;
+	static function get_PlayerX()
+	{
+		return HXP.halfWidth;
 	}
 	
 	public function new(level:Int)
@@ -27,8 +40,10 @@ class MainScene extends Scene
 	public override function begin()
 	{
 		// Spawn player.
-		ThisPlayer = new Player(200, 250, 0);
+		ThisPlayer = new Player();
 		add(ThisPlayer);
+		
+		ThisSong.Start();
 	}
 	
 	override public function update() 

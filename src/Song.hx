@@ -18,16 +18,16 @@ class Song
 	var _enemies:Array<Enemy>;
 	
 	private static var _level1Left:String =
-	".... 1.1. ....";
+	"........ 1.1..... 1.1.....";
 	private static var _level1Right:String =
-	".... .... 1.1.";
+	"........ ....1.1. ....1.1.";
 	
 	private static var _levelsLeft:Array<String> = [_level1Left];
 	private static var _levelsRight:Array<String> = [_level1Right];
 	
-	private static var _levelSfxs:Array<Sfx> = [Sound.Load("sfx/level1")];
-	private static var _levelsBeatDivision:Array<Float> = [4.0];
-	private static var _levelBpms:Array<Float> = [120.0];
+	private static var _levelSfxNames:Array<String> = ["sfx/level1"];
+	private static var _levelsBeatDivision:Array<Float> = [2.0];
+	private static var _levelBpms:Array<Float> = [135.0];
 	private static var _levelBeatPixelLengths:Array<Float> = [100.0];
 	
 	public static var CurrentSong(get, null):Song;
@@ -44,7 +44,7 @@ class Song
 	{
 		var result:Song = new Song();
 		result.Load(_levelsLeft[level - 1], _levelsRight[level - 1], _levelsBeatDivision[level - 1]);
-		result._sfx = _levelSfxs[level - 1];
+		result._sfx = Sound.Load(_levelSfxNames[level - 1]);
 		result._bpm = _levelBpms[level - 1];
 		result._beatPixelLength = _levelBeatPixelLengths[level - 1];
 		return result;
@@ -52,8 +52,8 @@ class Song
 	
 	private function Load(leftText:String, rightText:String, beatDivision:Float)
 	{
-		StringTools.replace(leftText, " ", "");
-		StringTools.replace(rightText, " ", "");
+		leftText = StringTools.replace(leftText, " ", "");
+		rightText = StringTools.replace(rightText, " ", "");
 		
 		for (i in 0...leftText.length) {
 			var beat = i / beatDivision;
@@ -73,6 +73,11 @@ class Song
 			default:
 				trace("unknown char" + char);
 		}
+	}
+	
+	public function Start()
+	{
+		_sfx.play(kMusicVolume);
 	}
 	
 	public function Update()
@@ -96,12 +101,12 @@ class Song
 	
 	public function BeatsToSeconds(beats:Float):Float
 	{
-		return beats * _bpm / 60.0;
+		return beats * 60 / _bpm;
 	}
 
 	public function SecondsToBeats(seconds:Float):Float
 	{
-		return seconds * 60 / _bpm;
+		return seconds * _bpm / 60.0;
 	}
 	
 	public function CurrentTime():Float

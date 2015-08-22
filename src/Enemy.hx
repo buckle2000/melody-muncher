@@ -22,6 +22,7 @@ class Enemy extends Entity
 	{
 		Beat = beat;
 		Left = left;
+		y = MainScene.FloorY;
 	}
 	
 	override public function update():Void 

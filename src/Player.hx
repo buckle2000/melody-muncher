@@ -14,14 +14,12 @@ import com.haxepunk.utils.Input;
 class Player extends Entity
 {
 	private var _spritemap:Spritemap = new Spritemap("img/player.png", 20, 20);
-	private var _playerNumber:Int;
 	
-	public function new(x:Float, y:Float, playerNumber:Int)
+	public function new()
 	{
-		super(x, y, _spritemap);
+		super(MainScene.PlayerX, MainScene.FloorY, _spritemap);
 		layer = 0;
 		type = "player";
-		_playerNumber = playerNumber;
 	}
 	
 	override public function update():Void 

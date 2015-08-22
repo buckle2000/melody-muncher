@@ -21,5 +21,7 @@ class BasicEnemy extends Enemy
 		// TODO: Randomization, etc.
 		
 		super.Reset(beat, left);
+		_spritemap.flipped = !left;
+		_spritemap.updateBuffer();
 	}
 }
