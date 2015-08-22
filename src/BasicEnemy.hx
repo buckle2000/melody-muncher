@@ -9,11 +9,13 @@ import com.haxepunk.graphics.Spritemap;
  */
 class BasicEnemy extends Enemy
 {
-	private var _spritemap:Spritemap = new Spritemap("img/player.png", 20, 20);
+	private var _spritemap:Spritemap = new Spritemap("img/basicenemy.png", 16, 24);
 
 	public function new()
 	{
 		super(_spritemap);
+		_spritemap.originX = _spritemap.width / 2;
+		_spritemap.originY = _spritemap.height;
 	}
 	
 	override public function Reset(beat:Float, left:Bool)

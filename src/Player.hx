@@ -16,7 +16,7 @@ class Player extends Entity
 	// Only one frame of attack prep for now.
 	private static inline var kAttackPrepTime:Float = 0.00;
 	
-	private var _spritemap:Spritemap = new Spritemap("img/player.png", 20, 20);
+	private var _spritemap:Spritemap = new Spritemap("img/player.png", 150, 100);
 	
 	private var _attackPrepStartTime:Float;
 	private var _attackPrepLeftPressed:Bool;
@@ -24,7 +24,9 @@ class Player extends Entity
 	
 	public function new()
 	{
-		super(MainScene.PlayerX, MainScene.FloorY, _spritemap);
+		super(MainScene.PlayerX, MainScene.FloorY + 3, _spritemap);
+		_spritemap.originX = _spritemap.width / 2;
+		_spritemap.originY = _spritemap.height;
 		layer = 0;
 		type = "player";
 		SetupAnimations();
@@ -42,7 +44,8 @@ class Player extends Entity
 		HandleAttackPrep();
 		
 		HandleAttacking();
-		
+
+		_spritemap.originX = _spritemap.width / 2 + (_spritemap.flipped ? 0 : 1);
 		_spritemap.updateBuffer();
 	}
 	
@@ -77,9 +80,9 @@ class Player extends Entity
 	{
 		_spritemap.add("idle", [0], 30, true);
 		_spritemap.add("bounce", [1], 30, true);
-		_spritemap.add("attackprep", [2], 30, true);
-		_spritemap.add("attackright", [3,6,5], 30, false);
-		_spritemap.add("attackboth", [10,11,12,13], 60, false);
+		_spritemap.add("attackprep", [1], 30, true);
+		_spritemap.add("attackright", [3], 10, false);
+		_spritemap.add("attackboth", [3], 10, false);
 		_spritemap.play("idle");
 	}
 	
