@@ -15,7 +15,7 @@ class Song
 	var _bpm:Float;
 	var _sfx:Sfx;
 	var _beatPixelLength:Float;
-	var _enemies:Array<Enemy> = new Array<Enemy>();
+	public var Enemies:Array<Enemy> = new Array<Enemy>();
 	
 	private static var _level1Left:String =
 	"........ 1.1..... 1.1.....";
@@ -72,7 +72,7 @@ class Song
 			case "1":
 				var enemy:BasicEnemy = MainScene.Instance.create(BasicEnemy);
 				enemy.Reset(beat, left);
-				_enemies.push(enemy);
+				Enemies.push(enemy);
 			default:
 				trace("unknown char" + char);
 		}
@@ -87,19 +87,23 @@ class Song
 	{
 	}
 	
-	// Clamps to left/right side.
+	// Clamps.
 	public function BeatToPosition(beat:Float, left:Bool):Float
 	{
 		var remainingBeats:Float = beat - CurrentBeat();
-		if (remainingBeats < 0) {
-			remainingBeats = 0;
-		}
 		var distance:Float = remainingBeats * _beatPixelLength;
 		if (left) {
 			distance = -distance;
 		}
 		var startPoint = left ? MainScene.LeftPosition : MainScene.RightPosition;
-		return distance + startPoint;
+		var result:Float = distance + startPoint;
+		if (left && result > MainScene.LeftHitPosition) {
+			return MainScene.LeftHitPosition;
+		}
+		if (!left && result < MainScene.RightHitPosition) {
+			return MainScene.RightHitPosition;
+		}
+		return result;
 	}
 	
 	public function BeatsToSeconds(beats:Float):Float

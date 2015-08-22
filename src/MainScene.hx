@@ -10,10 +10,20 @@ class MainScene extends Scene
 	public static var LeftPosition(get, null):Float;
 	static function get_LeftPosition()
 	{
-		return PlayerX - 20;
+		return PlayerX - 50;
 	}
 	public static var RightPosition(get, null):Float;
 	static function get_RightPosition()
+	{
+		return PlayerX + 50;
+	}
+	public static var LeftHitPosition(get, null):Float;
+	static function get_LeftHitPosition()
+	{
+		return PlayerX - 20;
+	}
+	public static var RightHitPosition(get, null):Float;
+	static function get_RightHitPosition()
 	{
 		return PlayerX + 20;
 	}

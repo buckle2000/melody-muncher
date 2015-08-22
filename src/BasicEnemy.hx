@@ -24,4 +24,11 @@ class BasicEnemy extends Enemy
 		_spritemap.flipped = !left;
 		_spritemap.updateBuffer();
 	}
+	
+	override public function Hit():Void 
+	{
+		super.Hit();
+		
+		Destroy();
+	}
 }

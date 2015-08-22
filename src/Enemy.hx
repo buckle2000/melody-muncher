@@ -10,6 +10,9 @@ import com.haxepunk.Mask;
  */
 class Enemy extends Entity
 {
+	// When to actually hit the player.
+	private static inline var kAttackBeat:Float = -0.5;
+	
 	public var Beat:Float;
 	public var Left:Bool;
 	
@@ -29,6 +32,31 @@ class Enemy extends Entity
 	{
 		x = Song.CurrentSong.BeatToPosition(Beat, Left);
 		
+		if (BeatsLeft() <= kAttackBeat) {
+			Attack();
+		}
+		
 		super.update();
+	}
+	
+	private function BeatsLeft():Float
+	{
+		return Beat - Song.CurrentSong.CurrentBeat();
+	}
+	
+	public function Hit():Void
+	{
+		// Overridden in base classes.
+	}
+	
+	public function Attack():Void
+	{
+		Destroy();
+	}
+	
+	public function Destroy():Void
+	{
+		MainScene.Instance.recycle(this);
+		Song.CurrentSong.Enemies.remove(this);
 	}
 }
