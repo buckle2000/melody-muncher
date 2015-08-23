@@ -88,6 +88,24 @@ class MainScene extends Scene
 		MainEmitter.newType("bad", [1]);
 		MainEmitter.setMotion("bad", 90, 10, 30 / 60.0, 0, 0, 0);
 		MainEmitter.setAlpha("bad");
+		MainEmitter.newType("1", [2]);
+		MainEmitter.setMotion("1", 0, 30, 10 / 60.0, 360, 30, 5 / 60.0);
+		MainEmitter.setAlpha("1");
+		MainEmitter.newType("2", [3]);
+		MainEmitter.setMotion("2", 0, 30, 10 / 60.0, 360, 30, 5 / 60.0);
+		MainEmitter.setAlpha("2");
+		MainEmitter.newType("3", [4]);
+		MainEmitter.setMotion("3", 0, 30, 10 / 60.0, 360, 30, 5 / 60.0);
+		MainEmitter.setAlpha("3");
+		MainEmitter.newType("1r", [5]);
+		MainEmitter.setMotion("1r", 0, 30, 10 / 60.0, 360, 30, 5 / 60.0);
+		MainEmitter.setAlpha("1r");
+		MainEmitter.newType("2r", [6]);
+		MainEmitter.setMotion("2r", 0, 30, 10 / 60.0, 360, 30, 5 / 60.0);
+		MainEmitter.setAlpha("2r");
+		MainEmitter.newType("3r", [7]);
+		MainEmitter.setMotion("3r", 0, 30, 10 / 60.0, 360, 30, 5 / 60.0);
+		MainEmitter.setAlpha("3r");
 	}
 	
 	public override function begin()

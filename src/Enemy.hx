@@ -4,6 +4,7 @@ import com.haxepunk.Entity;
 import com.haxepunk.Graphic;
 import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.Mask;
+import openfl.display.Sprite;
 
 /**
  * ...
@@ -81,5 +82,33 @@ class Enemy extends Entity
 		} else {
 			spritemap.color = 0xFFFFFF;
 		}
+	}
+	
+	private function HandleGhosts(spritemap:Spritemap, spritemapTop:Spritemap, spritemapBottom:Spritemap)
+	{
+		var ghostBeats:Float = 0.5;
+		var distance:Float = 50.0;
+		
+		var beatsLeft:Float = BeatsLeft();
+		
+		spritemapBottom.x = Left ? MainScene.LeftPosition : MainScene.RightPosition;
+		spritemapTop.x = Left ? MainScene.LeftPosition : MainScene.RightPosition;
+		if (beatsLeft < 0.0) {
+			spritemapTop.alpha -= 0.1;
+			spritemapBottom.alpha -= 0.1;
+		} else {
+			spritemapTop.alpha = 1.0 - beatsLeft;
+			spritemapBottom.alpha = 1.0 - beatsLeft;
+		}
+		spritemapTop.y = beatsLeft * distance;
+		if (spritemapTop.y < 0) {
+			spritemapTop.y = 0;
+		}
+		spritemapBottom.y = -spritemapTop.y;
+		
+		spritemapTop.y += MainScene.FloorY;
+		spritemapBottom.y += MainScene.FloorY;
+		spritemapTop.flipped = spritemap.flipped;
+		spritemapBottom.flipped = spritemap.flipped;
 	}
 }

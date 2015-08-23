@@ -6,6 +6,8 @@
 
 0 Player
 
+10 enemies
+
 100 Level foreground
 
 200 Player background
