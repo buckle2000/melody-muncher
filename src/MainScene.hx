@@ -114,15 +114,18 @@ class MainScene extends Scene
 		addGraphic(MainEmitter, -500);
 		
 		// Add score.
-		addGraphic(_scoreText, -600);
 		_scoreText.x = HXP.halfWidth - 50;
-		_scoreText.y = 200;
-		addGraphic(_chainText, -600);
+		_scoreText.y = 220;
 		_chainText.x = HXP.halfWidth - 50;
-		_chainText.y = 220;
-		addGraphic(_levelText, -600);
+		_chainText.y = 240;
 		_levelText.x = HXP.halfWidth - 50;
-		_levelText.y = 240;
+		_levelText.y = 200;
+
+		if (!Song.CurrentSong.IsTutorial) {
+			addGraphic(_scoreText, -600);
+			addGraphic(_chainText, -600);
+		}
+		addGraphic(_levelText, -600);
 		
 		for (i in 0...5) {
 			var star = new Spritemap("img/star.png", 17, 17);
@@ -135,7 +138,9 @@ class MainScene extends Scene
 			star.add("6", [6]);
 			star.play("0");
 			_stars.push(star);
-			addGraphic(star, -600, HXP.halfWidth - 17 * 2.5 + i * 17, 180);
+			if (!Song.CurrentSong.IsTutorial) {
+				addGraphic(star, -600, HXP.halfWidth - 17 * 2.5 + i * 17, 180);
+			}
 		}
 		
 		// Add faders.
@@ -177,7 +182,15 @@ class MainScene extends Scene
 			
 			if (_fadeOutFader.alpha >= 1.0) {
 				HXP.scene = new MenuScene();
-				MenuScene.Scores1[Level - 1] = Score;
+				if (MenuScene.Difficulty == 0) {
+					MenuScene.Scores1[Level - 1] = Score;
+				}
+				if (MenuScene.Difficulty == 1) {
+					MenuScene.Scores2[Level - 1] = Score;
+				}
+				if (MenuScene.Difficulty == 2) {
+					MenuScene.Scores3[Level - 1] = Score;
+				}
 			}
 		}
 		
@@ -202,6 +215,14 @@ class MainScene extends Scene
 			case 2:
 				_levelText.text = "ARST";
 			case 3:
+				_levelText.text = "ARST";
+			case 4:
+				_levelText.text = "ARST";
+			case 5:
+				_levelText.text = "ARST";
+			case 6:
+				_levelText.text = "ARST";
+			case 7:
 				_levelText.text = "ARST";
 		}
 		

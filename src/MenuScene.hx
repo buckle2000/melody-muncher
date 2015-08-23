@@ -115,6 +115,7 @@ class MenuScene extends Scene
 		_songsChoices.push(new Text("Level 2 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
 		_songsChoices.push(new Text("Tutorial 3 - Split Munch"));
 		_songsChoices.push(new Text("Level 3 - arst: " + Scores1[2] + "/" + MaxScores1[2]));
+		_songsChoices.push(new Text("Tutorail 4"));
 		_songsChoices.push(new Text("Back"));
 		for (i in 0..._songsChoices.length) {
 			_songsChoices[i].y = kSongsChoiceStartY + kSongsChoiceSpacingY * i;
@@ -236,10 +237,37 @@ class MenuScene extends Scene
 			}
 			_selectedChoice = 0;
 		}
+		if (Input.pressed(Key.ESCAPE)) {
+			_state = "main";
+			_selectedChoice = 0;
+			Sound.Load("sfx/cursor").play();
+		}
 	}
 	
 	private function SongsUpdate()
 	{
+		var scoreArray = null;
+		var maxScoreArray = null;
+		if (Difficulty == 0) {
+			scoreArray = Scores1;
+			maxScoreArray = MaxScores1;
+		} else if (Difficulty == 1) {
+			scoreArray = Scores2;
+			maxScoreArray = MaxScores2;
+		} else if (Difficulty == 2) {
+			scoreArray = Scores3;
+			maxScoreArray = MaxScores3;
+		} else {
+			trace("awftnuyawfotn");
+		}
+		_songsChoices[0].text = "Tutorial 1 - Welcome to Melody Muncher";
+		_songsChoices[1].text = "Level 1 - arst (Score: " + scoreArray[0] + "/" + maxScoreArray[0] + ")";
+		_songsChoices[2].text = "Tutorial 2 - Armored Enemies";
+		_songsChoices[3].text = "Level 2 - arst (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
+		_songsChoices[4].text = "Tutorial 3 - Split Munch";
+		_songsChoices[5].text = "Level 3 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
+		_songsChoices[6].text = "Tutorial 4 - Teleporters";
+
 		for (choice in _songsChoices) {
 			choice.visible = true;
 		}
@@ -271,6 +299,11 @@ class MenuScene extends Scene
 					case 5:
 						// level 3
 						HXP.scene = new MainScene(3);
+					case 6:
+						// tutorial 4
+						HXP.scene = new MainScene(7);
+					default:
+						trace("reawftnuynoaw");
 				}
 				return;
 			}
@@ -300,6 +333,11 @@ class MenuScene extends Scene
 				_fadeTimer++;
 				Sound.Load("sfx/startgame").play();
 			}
+		}
+		if (Input.pressed(Key.ESCAPE)) {
+			_state = "difficulty";
+			_selectedChoice = Difficulty;
+			Sound.Load("sfx/cursor").play();
 		}
 	}
 	

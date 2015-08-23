@@ -14,7 +14,7 @@ class Song
 	public static inline var kMusicVolume:Float = 0.8;
 	
 	// TODO: lag calibration in menu
-	public static var LagCalibration:Float = 0.05;
+	public static var LagCalibration:Float = 0.00;
 	
 	// For one side of the timing window.
 	public static inline var kDefaultTimingWindow:Float = 0.2;
@@ -105,22 +105,27 @@ class Song
 "........ ........ ........ 2.......";
 
 	private static var _level6Left:String =
-"........ 3....... ........ ........";
+"........ 1....... ........ 1.......";
 	private static var _level6Right:String =
+"........ 1....... ........ 1.......";
+
+	private static var _level7Left:String =
+"........ 3....... ........ ........";
+	private static var _level7Right:String =
 "........ ........ ........ 3.......";
 
-	public static var NumSongs:Int = 6;
+	public static var NumSongs:Int = 7;
 	public var LevelNumber:Int;
-	private static var _tutorialLevels:Array<Bool> = [false, false, false, true, true, true];
-	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left, _level3Left, _level4Left, _level5Left, _level6Left];
-	private static var _levelsRight:Array<String> = [_level1Right, _level2Right, _level3Right, _level4Right, _level5Right, _level6Right];
-	private static var _loopLengths:Array<Float> = [0, 0, 0, 8.0, 8.0, 8.0];
+	private static var _tutorialLevels:Array<Bool> = [false, false, false, true, true, true, true];
+	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left, _level3Left, _level4Left, _level5Left, _level6Left, _level7Left];
+	private static var _levelsRight:Array<String> = [_level1Right, _level2Right, _level3Right, _level4Right, _level5Right, _level6Right, _level7Right];
+	private static var _loopLengths:Array<Float> = [0, 0, 0, 8.0, 8.0, 8.0, 8.0];
 	
-	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2", "sfx/level3", "sfx/level4", "sfx/level5", "sfx/level6"];
-	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0];
-	private static var _levelBpms:Array<Float> = [125.0, 115.0, 130.0, 120.0, 120.0, 120.0];
-	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0, 90.0, 80.0, 80.0, 80.0];
-	private static var _levelEndBeats:Array<Float> = [30*4, 37*4, 38*4, 999999, 999999, 999999];
+	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2", "sfx/level3", "sfx/level4", "sfx/level5", "sfx/level6", "sfx/level7"];
+	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0];
+	private static var _levelBpms:Array<Float> = [125.0, 115.0, 130.0, 120.0, 120.0, 120.0, 120.0];
+	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0, 90.0, 80.0, 80.0, 80.0, 80.0];
+	private static var _levelEndBeats:Array<Float> = [30*4, 37*4, 38*4, 999999, 999999, 999999, 999999];
 	
 	private static inline var kBounceTime:Float = 0.1;
 	
