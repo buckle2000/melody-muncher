@@ -3,6 +3,7 @@ import com.haxepunk.graphics.Backdrop;
 import com.haxepunk.graphics.Image;
 import com.haxepunk.HXP;
 import com.haxepunk.Scene;
+import com.haxepunk.graphics.Emitter;
 
 class MainScene extends Scene
 {
@@ -12,6 +13,8 @@ class MainScene extends Scene
 	
 	public var Level:Int;
 	
+	public var MainEmitter:Emitter = new Emitter("img/particles.png", 32, 32);
+
 	private var _shakeIntensity:Int = 0;
 	private var _shakeTime:Int = 0;
 	
@@ -59,6 +62,10 @@ class MainScene extends Scene
 		super();
 		Instance = this;
 		Level = level;
+		
+		MainEmitter.newType("tiny", [0]);
+		MainEmitter.setMotion("tiny", 0, 30, 10 / 60.0, 360, 50, 10 / 60.0);
+		MainEmitter.setAlpha("tiny");
 	}
 	
 	public override function begin()
@@ -83,6 +90,9 @@ class MainScene extends Scene
 		// Spawn player.
 		ThisPlayer = new Player();
 		add(ThisPlayer);
+		
+		// Add particles.
+		addGraphic(MainEmitter, -500);
 		
 		// Start level.
 		ThisSong.Start();

@@ -48,7 +48,12 @@ class Enemy extends Entity
 	public function Hit():Void
 	{
 		// Camera shake.
-		MainScene.Shake(1, 5);
+		MainScene.Shake(1, 3);
+		
+		// Particles.
+		for (i in 0...30) {
+			MainScene.Instance.MainEmitter.emit("tiny", x, y);
+		}
 		
 		// Overridden in base classes.
 	}

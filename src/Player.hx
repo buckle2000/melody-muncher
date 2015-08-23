@@ -44,9 +44,21 @@ class Player extends Entity
 		HandleAttackPrep();
 		
 		HandleAttacking();
+		
+		HandleMiss();
 
 		_spritemap.originX = _spritemap.width / 2 + (_spritemap.flipped ? 0 : 1);
 		_spritemap.updateBuffer();
+	}
+	
+	private function HandleMiss():Void
+	{
+		if (_spritemap.currentAnim == "missright" || _spritemap.currentAnim == "missboth" ||
+		_spritemap.currentAnim == "bothmissleft" || _spritemap.currentAnim == "bothmissright") {
+			if (_spritemap.complete) {
+				_spritemap.play(Song.CurrentSong.ShouldBounce() ? "bounce" : "idle");
+			}
+		}
 	}
 	
 	private function HandleAttacking():Void
@@ -80,9 +92,13 @@ class Player extends Entity
 	{
 		_spritemap.add("idle", [0], 30, true);
 		_spritemap.add("bounce", [1], 30, true);
-		_spritemap.add("attackprep", [1], 30, true);
+		_spritemap.add("attackprep", [2], 30, true);
 		_spritemap.add("attackright", [3, 4, 4], 20, false);
-		_spritemap.add("attackboth", [3, 4, 4], 20, false);
+		_spritemap.add("attackboth", [6, 7, 7], 20, false);
+		_spritemap.add("missright", [3, 5, 5, 5, 5], 15, false);
+		_spritemap.add("missboth", [6, 8, 8, 8, 8], 15, false);
+		_spritemap.add("bothmissleft", [6, 10, 10, 10, 10], 15, false);
+		_spritemap.add("bothmissright", [6, 11, 11, 11, 11], 15, false);
 		_spritemap.play("idle");
 	}
 	
@@ -101,7 +117,8 @@ class Player extends Entity
 	
 	private function HandleInput():Void
 	{
-		if (_spritemap.currentAnim == "idle" || _spritemap.currentAnim == "bounce") {
+		if (_spritemap.currentAnim == "idle" || _spritemap.currentAnim == "bounce" ||
+		_spritemap.currentAnim == "attackright" || _spritemap.currentAnim == "attackboth") {
 			if (Input.pressed("left") || Input.pressed("right")) {
 				_spritemap.play("attackprep");
 				_attackPrepStartTime = Song.CurrentSong.CurrentTime();
@@ -124,6 +141,7 @@ class Player extends Entity
 			enemy.Hit();
 		} else {
 			Sound.Load("sfx/miss").play();
+			_spritemap.play("missright");
 		}
 	}
 	private function AttackRight():Void
@@ -136,6 +154,7 @@ class Player extends Entity
 			enemy.Hit();
 		} else {
 			Sound.Load("sfx/miss").play();
+			_spritemap.play("missright");
 		}
 	}
 	private function AttackBoth():Void
@@ -152,6 +171,15 @@ class Player extends Entity
 		}
 		if (enemyLeft == null && enemyRight == null) {
 			Sound.Load("sfx/miss").play();
+			_spritemap.play("missboth");
+		} else if (enemyLeft == null) {
+			Sound.Load("sfx/miss").play();
+			_spritemap.play("bothmissleft");
+			_spritemap.flipped = false;
+		} else if (enemyRight == null) {
+			Sound.Load("sfx/miss").play();
+			_spritemap.play("bothmissright");
+			_spritemap.flipped = false;
 		}
 	}
 }
