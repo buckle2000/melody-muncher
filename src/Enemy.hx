@@ -60,6 +60,8 @@ class Enemy extends Entity
 	
 	public function Attack():Void
 	{
+		MainScene.Instance.ThisPlayer.Flash(10);
+		Sound.Load("sfx/hit").play();
 		Destroy();
 	}
 	

@@ -27,6 +27,8 @@ class Player extends Entity
 	
 	private var _missStartBeat:Float;
 	
+	private var _flashTimer:Int = 0;
+	
 	public function new()
 	{
 		super(MainScene.PlayerX, MainScene.FloorY + 3, _spritemap);
@@ -54,6 +56,24 @@ class Player extends Entity
 
 		_spritemap.originX = _spritemap.width / 2 + (_spritemap.flipped ? 0 : 1);
 		_spritemap.updateBuffer();
+		
+		HandleFlashing();
+	}
+	
+	public function Flash(time:Int):Void
+	{
+		_flashTimer = time;
+	}
+	
+	private function HandleFlashing():Void
+	{
+		if (_flashTimer <= 0) {
+			_spritemap.visible = true;
+			return;
+		}
+		
+		_flashTimer--;
+		_spritemap.visible = _flashTimer % 2 == 0;
 	}
 	
 	private function HandleMiss():Void
