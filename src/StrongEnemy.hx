@@ -18,6 +18,7 @@ class StrongEnemy extends Enemy
 		_spritemap.originX = _spritemap.width / 2;
 		_spritemap.originY = _spritemap.height;
 		_spritemap.add("walk", [0, 1], 5);
+		_spritemap.add("walk2", [2, 3], 5);
 		_spritemap.play("walk");
 	}
 	
@@ -26,6 +27,7 @@ class StrongEnemy extends Enemy
 		// TODO: Randomization, etc.
 		
 		super.Reset(beat, left);
+		_spritemap.play("walk");
 		_firstHit = false;
 		_spritemap.flipped = !left;
 		_spritemap.updateBuffer();
@@ -41,6 +43,7 @@ class StrongEnemy extends Enemy
 		} else {
 			Sound.Load("sfx/munchstrong1").play();
 			_firstHit = true;
+			_spritemap.play("walk2");
 			// Move back.
 			Beat = Beat + 0.5;
 		}
