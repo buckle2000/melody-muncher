@@ -9,7 +9,7 @@ import com.haxepunk.graphics.Spritemap;
  */
 class StrongEnemy extends Enemy
 {
-	private var _spritemap:Spritemap = new Spritemap("img/strongenemy.png", 16, 24);
+	private var _spritemap:Spritemap = new Spritemap("img/strongenemy.png", 32, 32);
 	private var _firstHit:Bool = false;
 
 	public function new()
@@ -17,6 +17,8 @@ class StrongEnemy extends Enemy
 		super(_spritemap);
 		_spritemap.originX = _spritemap.width / 2;
 		_spritemap.originY = _spritemap.height;
+		_spritemap.add("walk", [0, 1], 5);
+		_spritemap.play("walk");
 	}
 	
 	override public function Reset(beat:Float, left:Bool)
@@ -48,11 +50,6 @@ class StrongEnemy extends Enemy
 	{
 		super.update();
 		
-		if (Song.CurrentSong.ShouldBounce()) {
-			_spritemap.color = 0x808080;
-		} else {
-			_spritemap.color = 0xFFFFFF;
-		}
+		Pulse(_spritemap);
 	}
-	
 }

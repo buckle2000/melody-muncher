@@ -81,8 +81,8 @@ class Player extends Entity
 		_spritemap.add("idle", [0], 30, true);
 		_spritemap.add("bounce", [1], 30, true);
 		_spritemap.add("attackprep", [1], 30, true);
-		_spritemap.add("attackright", [3, 4, 4], 15, false);
-		_spritemap.add("attackboth", [3, 4, 4], 15, false);
+		_spritemap.add("attackright", [3, 4, 4], 20, false);
+		_spritemap.add("attackboth", [3, 4, 4], 20, false);
 		_spritemap.play("idle");
 	}
 	

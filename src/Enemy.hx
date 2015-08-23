@@ -2,6 +2,7 @@ package;
 
 import com.haxepunk.Entity;
 import com.haxepunk.Graphic;
+import com.haxepunk.graphics.Spritemap;
 import com.haxepunk.Mask;
 
 /**
@@ -61,5 +62,16 @@ class Enemy extends Entity
 	{
 		MainScene.Instance.recycle(this);
 		Song.CurrentSong.EnemyList(Left).remove(this);
+	}
+	
+	private function Pulse(spritemap:Spritemap)
+	{
+		if (Song.CurrentSong.CurrentBeat() % 1.0 < 0.05 || Song.CurrentSong.CurrentBeat() % 1.0 > 1.0 - 0.05) {
+			spritemap.color = 0xAAAAAA;
+		} else if (Song.CurrentSong.CurrentBeat() % 1.0 < 0.1 || Song.CurrentSong.CurrentBeat() % 1.0 > 1.0 - 0.1) {
+			spritemap.color = 0xCCCCCC;
+		} else {
+			spritemap.color = 0xFFFFFF;
+		}
 	}
 }

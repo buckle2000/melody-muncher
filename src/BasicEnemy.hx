@@ -39,11 +39,6 @@ class BasicEnemy extends Enemy
 	{
 		super.update();
 		
-		if (Song.CurrentSong.ShouldBounce()) {
-			_spritemap.color = 0x808080;
-		} else {
-			_spritemap.color = 0xFFFFFF;
-		}
+		Pulse(_spritemap);
 	}
-	
 }
