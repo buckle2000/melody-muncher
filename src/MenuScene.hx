@@ -16,6 +16,13 @@ class MenuScene extends Scene
 {
 	public static var Difficulty:Int = 0;
 	
+	public static var Scores1:Array<Int> = new Array<Int>();
+	public static var Scores2:Array<Int> = new Array<Int>();
+	public static var Scores3:Array<Int> = new Array<Int>();
+	public static var MaxScores1:Array<Int> = null;
+	public static var MaxScores2:Array<Int> = null;
+	public static var MaxScores3:Array<Int> = null;
+	
 	// TODO
 	var _music:Sfx = Sound.Load("sfx/level1");
 	static var _state:String = "main";
@@ -44,6 +51,20 @@ class MenuScene extends Scene
 	
 	override public function begin() 
 	{
+		if (MaxScores1 == null) {
+			MaxScores1 = new Array<Int>();
+			MaxScores2 = new Array<Int>();
+			MaxScores3 = new Array<Int>();
+			for (i in 1...Song.NumSongs+1) {
+				MaxScores1.push(Song.MaxScoreForLevel(i));
+				MaxScores2.push(Song.MaxScoreForLevel(i));
+				MaxScores3.push(Song.MaxScoreForLevel(i));
+				Scores1.push(0);
+				Scores2.push(0);
+				Scores3.push(0);
+			}
+		}
+		
 		super.begin();
 		
 		//addGraphic(new Image("img/menu.png"));
@@ -89,11 +110,11 @@ class MenuScene extends Scene
 		}
 
 		_songsChoices.push(new Text("Tutorial 1 - Welcome to Melody Muncher"));
-		_songsChoices.push(new Text("Level 1 - arst"));
+		_songsChoices.push(new Text("Level 1 - arst: " + Scores1[0] + "/" + MaxScores1[0]));
 		_songsChoices.push(new Text("Tutorial 2 - Armored Enemies"));
-		_songsChoices.push(new Text("Level 2 - arst"));
+		_songsChoices.push(new Text("Level 2 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
 		_songsChoices.push(new Text("Tutorial 3 - Split Munch"));
-		_songsChoices.push(new Text("Level 3 - arst"));
+		_songsChoices.push(new Text("Level 3 - arst: " + Scores1[2] + "/" + MaxScores1[2]));
 		_songsChoices.push(new Text("Back"));
 		for (i in 0..._songsChoices.length) {
 			_songsChoices[i].y = kSongsChoiceStartY + kSongsChoiceSpacingY * i;
@@ -167,7 +188,7 @@ class MenuScene extends Scene
 				case 1:
 					// jukebox
 					_fadeTimer++;
-					Sound.Load("sfx/cursor").play();
+					Sound.Load("sfx/startgame").play();
 			}
 		}
 	}
@@ -234,19 +255,19 @@ class MenuScene extends Scene
 				switch(_selectedChoice) {
 					case 0:
 						// Tutorial 1
-						HXP.scene = new MainScene(1);
+						HXP.scene = new MainScene(4);
 					case 1:
 						// level 1
 						HXP.scene = new MainScene(1);
 					case 2:
 						// Tutorial 2
-						HXP.scene = new MainScene(2);
+						HXP.scene = new MainScene(5);
 					case 3:
 						// level 2
 						HXP.scene = new MainScene(2);
 					case 4:
 						// Tutorial 3
-						HXP.scene = new MainScene(3);
+						HXP.scene = new MainScene(6);
 					case 5:
 						// level 3
 						HXP.scene = new MainScene(3);
@@ -275,8 +296,9 @@ class MenuScene extends Scene
 				_selectedChoice = Difficulty;
 				Sound.Load("sfx/cursor").play();
 			} else {
+				// start game
 				_fadeTimer++;
-				Sound.Load("sfx/cursor").play();
+				Sound.Load("sfx/startgame").play();
 			}
 		}
 	}

@@ -18,7 +18,7 @@ class Main extends Engine
 		HXP.screen.scale = 2;
 		HXP.screen.smoothing = false;
 		HXP.scene = new MenuScene();
-		//HXP.scene = new MainScene(3);
+		//HXP.scene = new MainScene(5);
 		
 		Input.define("up", [Key.UP]);
 		Input.define("left", [Key.LEFT]);

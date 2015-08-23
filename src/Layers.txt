@@ -1,3 +1,5 @@
+-5000 faders
+
 -600 Scoretext
 
 -500 Particles (Main)

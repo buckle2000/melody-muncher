@@ -6,6 +6,8 @@ import com.haxepunk.graphics.Text;
 import com.haxepunk.HXP;
 import com.haxepunk.Scene;
 import com.haxepunk.graphics.Emitter;
+import com.haxepunk.utils.Input;
+import com.haxepunk.utils.Key;
 import openfl.media.SoundTransform;
 
 class MainScene extends Scene
@@ -34,6 +36,12 @@ class MainScene extends Scene
 	
 	private var _scoreText:Text = new Text();
 	private var _chainText:Text = new Text();
+	private var _levelText:Text = new Text();
+	
+	private var _fadeInFader:Image = new Image("img/white.png");
+	private var _fadeOutFader:Image = new Image("img/white.png");
+	private var _fadeOutTimer:Int = 0;
+	private var kFadeDuration:Int = 120;
 	
 	public static var LeftPosition(get, null):Float;
 	static function get_LeftPosition()
@@ -84,14 +92,14 @@ class MainScene extends Scene
 		// Load level.
 		ThisSong = Song.LoadLevel(Level);
 		
-		if (Level == 1 || Level == 2 || Level == 3) {
+		//if (Level == 1 || Level == 2 || Level == 3) {
 			addGraphic(new Image("img/level1_fore.png"), 100);
 			addGraphic(new Image("img/level1_back.png"), 1000);
 			_scrollBackground1 = new Backdrop("img/level1_scroll1.png");
 			addGraphic(_scrollBackground1, 500);
 			_scrollBackground2 = new Backdrop("img/level1_scroll2.png");
 			addGraphic(_scrollBackground2, 600);
-		}
+		//}
 
 		var playerBackgroundImage = new Image("img/player_background.png");
 		playerBackgroundImage.originX = playerBackgroundImage.width / 2;
@@ -112,6 +120,9 @@ class MainScene extends Scene
 		addGraphic(_chainText, -600);
 		_chainText.x = HXP.halfWidth - 50;
 		_chainText.y = 220;
+		addGraphic(_levelText, -600);
+		_levelText.x = HXP.halfWidth - 50;
+		_levelText.y = 240;
 		
 		for (i in 0...5) {
 			var star = new Spritemap("img/star.png", 17, 17);
@@ -126,6 +137,16 @@ class MainScene extends Scene
 			_stars.push(star);
 			addGraphic(star, -600, HXP.halfWidth - 17 * 2.5 + i * 17, 180);
 		}
+		
+		// Add faders.
+		_fadeInFader.color = 0x000000;
+		_fadeOutFader.color = 0x000000;
+		_fadeInFader.scale = HXP.width * 2;
+		_fadeOutFader.scale = HXP.width * 2;
+		_fadeInFader.alpha = 1;
+		_fadeOutFader.alpha = 0;
+		addGraphic(_fadeInFader, -5000);
+		addGraphic(_fadeOutFader, -5000);
 		
 		// Start level.
 		ThisSong.Start();
@@ -148,12 +169,41 @@ class MainScene extends Scene
 		super.update();
 		
 		HandleScore();
+		
+		_fadeInFader.alpha -= 2.0 / kFadeDuration;
+		
+		if (Song.CurrentSong.IsDone() || _fadeOutFader.alpha > 0.0) {
+			_fadeOutFader.alpha += 1.0 / kFadeDuration;
+			
+			if (_fadeOutFader.alpha >= 1.0) {
+				HXP.scene = new MenuScene();
+				MenuScene.Scores1[Level - 1] = Score;
+			}
+		}
+		
+		if (Song.CurrentSong.IsTutorial) {
+			if ((Input.pressed(Key.ENTER) || Input.pressed(Key.ESCAPE)) &&
+				_fadeOutFader.alpha == 0.0) {
+				_fadeOutFader.alpha += 1.0 / kFadeDuration;
+				Sound.Load("sfx/startgame").play();
+			}
+		}
 	}
 	
 	private function HandleScore()
 	{
 		_scoreText.text = "Score: " + Score + "/" + Song.CurrentSong.MaxScore;
 		_chainText.text = "Chain: " + Chain;
+		
+		switch(Level)
+		{
+			case 1:
+				_levelText.text = "ARST";
+			case 2:
+				_levelText.text = "ARST";
+			case 3:
+				_levelText.text = "ARST";
+		}
 		
 		for (i in 0...5) {
 			var star:Spritemap = _stars[i];
