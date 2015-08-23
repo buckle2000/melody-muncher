@@ -168,6 +168,8 @@ class Player extends Entity
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("missright");
 			_missStartBeat = Song.CurrentSong.CurrentBeat();
+			MainScene.Instance.MainEmitter.emit("bad", x - 1, y - 50);
+			MainScene.Instance.ResetChain();
 		}
 	}
 	private function AttackRight():Void
@@ -182,6 +184,8 @@ class Player extends Entity
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("missright");
 			_missStartBeat = Song.CurrentSong.CurrentBeat();
+			MainScene.Instance.MainEmitter.emit("bad", x - 1, y - 50);
+			MainScene.Instance.ResetChain();
 		}
 	}
 	private function AttackBoth():Void
@@ -200,16 +204,22 @@ class Player extends Entity
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("missboth");
 			_missStartBeat = Song.CurrentSong.CurrentBeat();
+			MainScene.Instance.MainEmitter.emit("bad", x - 1, y - 50);
+			MainScene.Instance.ResetChain();
 		} else if (enemyLeft == null) {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("bothmissleft");
 			_spritemap.flipped = false;
 			_missStartBeat = Song.CurrentSong.CurrentBeat();
+			MainScene.Instance.MainEmitter.emit("bad", x - 1, y - 50);
+			MainScene.Instance.ResetChain();
 		} else if (enemyRight == null) {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("bothmissright");
 			_spritemap.flipped = false;
+			MainScene.Instance.MainEmitter.emit("bad", x - 1, y - 50);
 			_missStartBeat = Song.CurrentSong.CurrentBeat();
+			MainScene.Instance.ResetChain();
 		}
 	}
 }

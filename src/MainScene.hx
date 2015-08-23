@@ -85,6 +85,9 @@ class MainScene extends Scene
 		MainEmitter.newType("tiny", [0]);
 		MainEmitter.setMotion("tiny", 0, 30, 10 / 60.0, 360, 50, 10 / 60.0);
 		MainEmitter.setAlpha("tiny");
+		MainEmitter.newType("bad", [1]);
+		MainEmitter.setMotion("bad", 90, 10, 30 / 60.0, 0, 0, 0);
+		MainEmitter.setAlpha("bad");
 	}
 	
 	public override function begin()
