@@ -7,6 +7,7 @@ import com.haxepunk.Scene;
 import com.haxepunk.Sfx;
 import com.haxepunk.utils.Input;
 import com.haxepunk.utils.Key;
+import com.haxepunk.graphics.Backdrop;
 
 /**
  * ...
@@ -15,7 +16,7 @@ import com.haxepunk.utils.Key;
 class MenuScene extends Scene
 {
 	public static var Difficulty:Int = 0;
-	
+
 	public static var Scores1:Array<Int> = new Array<Int>();
 	public static var Scores2:Array<Int> = new Array<Int>();
 	public static var Scores3:Array<Int> = new Array<Int>();
@@ -23,25 +24,31 @@ class MenuScene extends Scene
 	public static var MaxScores2:Array<Int> = null;
 	public static var MaxScores3:Array<Int> = null;
 	
+	private var _scrollBackground1:Backdrop;
+	private var _scrollBackground2:Backdrop;
+	
+	private static var _scrollRate1:Float = 0.2;
+	private static var _scrollRate2:Float = 0.1;
+	
 	// TODO
 	var _music:Sfx = Sound.Load("sfx/level1");
 	static var _state:String = "main";
 	static var _selectedChoice:Int = 0;
 
 	var _mainChoices:Array<Text> = new Array<Text>();
-	static inline var kMainChoiceStartX = 250-45;
-	static inline var kMainChoiceStartY = 170;
+	static inline var kMainChoiceStartX = 250;
+	static inline var kMainChoiceStartY = 120;
 	static inline var kMainChoiceSpacingY = 15;
 
 	var _difficultyChoices:Array<Text> = new Array<Text>();
-	static inline var kDifficultyChoiceStartX = 250-55;
-	static inline var kDifficultyChoiceStartY = 170;
+	static inline var kDifficultyChoiceStartX = 250;
+	static inline var kDifficultyChoiceStartY = 120;
 	static inline var kDifficultyChoiceSpacingY = 15;
 	
 	var _songsChoices:Array<Text> = new Array<Text>();
-	static inline var kSongsChoiceStartX = 250-60;
-	static inline var kSongsChoiceStartY = 150;
-	static inline var kSongsChoiceSpacingY = 12;
+	static inline var kSongsChoiceStartX = 250;
+	static inline var kSongsChoiceStartY = 100;
+	static inline var kSongsChoiceSpacingY = 15;
 	
 	var _cursor:Image = new Image("img/cursor.png");
 
@@ -67,14 +74,24 @@ class MenuScene extends Scene
 		
 		super.begin();
 		
+
+		addGraphic(new Image("img/level1_fore.png"), 100);
+		addGraphic(new Image("img/level1_back.png"), 1000);
+		_scrollBackground1 = new Backdrop("img/level1_scroll1.png");
+		addGraphic(_scrollBackground1, 500);
+		_scrollBackground2 = new Backdrop("img/level1_scroll2.png");
+		addGraphic(_scrollBackground2, 600);
+		HandleBackdrops();
+		
+		
 		//addGraphic(new Image("img/menu.png"));
 		
-		var title:Text = new Text("Melody Muncher", 250, 100);
+		var title:Text = new Text("Melody Muncher", 250, 50);
 		title.size = 24;
 		title.originX = title.textWidth / 2;
 		title.smooth = false;
 		addGraphic(title);
-		var title2:Text = new Text("by DDRKirby(ISQ)", 250, 125);
+		var title2:Text = new Text("by DDRKirby(ISQ)", 250, 75);
 		title2.size = 8;
 		title2.originX = title2.textWidth / 2;
 		title2.smooth = false;
@@ -84,6 +101,9 @@ class MenuScene extends Scene
 		title3.originX = title3.textWidth / 2;
 		title3.smooth = false;
 		addGraphic(title3);
+		ShadowText.Create(title);
+		ShadowText.Create(title2);
+		ShadowText.Create(title3);
 		
 		_music.loop(Song.kMusicVolume);
 		
@@ -94,6 +114,8 @@ class MenuScene extends Scene
 			_mainChoices[i].x = kMainChoiceStartX;
 			_mainChoices[i].size = 8;
 			addGraphic(_mainChoices[i]);
+			_mainChoices[i].originX = _mainChoices[i].textWidth / 2;
+			ShadowText.Create(_mainChoices[i]);
 			_mainChoices[i].smooth = false;
 		}
 
@@ -106,7 +128,9 @@ class MenuScene extends Scene
 			_difficultyChoices[i].x = kDifficultyChoiceStartX;
 			_difficultyChoices[i].size = 8;
 			addGraphic(_difficultyChoices[i]);
+			ShadowText.Create(_difficultyChoices[i]);
 			_difficultyChoices[i].smooth = false;
+			_difficultyChoices[i].originX = _difficultyChoices[i].textWidth / 2;
 		}
 
 		_songsChoices.push(new Text("Tutorial 1 - Welcome to Melody Muncher"));
@@ -123,6 +147,7 @@ class MenuScene extends Scene
 			_songsChoices[i].x = kSongsChoiceStartX;
 			_songsChoices[i].size = 8;
 			addGraphic(_songsChoices[i]);
+			ShadowText.Create(_songsChoices[i]);
 			_songsChoices[i].smooth = false;
 		}
 		
@@ -140,12 +165,22 @@ class MenuScene extends Scene
 		flash.Reset(0x000000, 1, 0.05);
 	}
 
+	private function HandleBackdrops()
+	{
+		if (_scrollBackground1 != null) {
+			_scrollBackground1.x += _scrollRate1;
+		}
+		if (_scrollBackground2 != null) {
+			_scrollBackground2.x += _scrollRate2;
+		}
+	}
+	
 	private function MainUpdate()
 	{
 		for (choice in _mainChoices) {
 			choice.visible = true;
 		}
-		_cursor.x = kMainChoiceStartX;
+		_cursor.x = - _mainChoices[_selectedChoice].textWidth / 2 + _mainChoices[_selectedChoice].x;
 		_cursor.y = kMainChoiceStartY + _selectedChoice * kMainChoiceSpacingY;
 
 		if (_fadeTimer > 0) {
@@ -200,7 +235,7 @@ class MenuScene extends Scene
 		for (choice in _difficultyChoices) {
 			choice.visible = true;
 		}
-		_cursor.x = kDifficultyChoiceStartX;
+		_cursor.x = - _difficultyChoices[_selectedChoice].textWidth / 2 + _difficultyChoices[_selectedChoice].x;
 		_cursor.y = kDifficultyChoiceStartY + _selectedChoice * kDifficultyChoiceSpacingY;
 
 		if (Input.pressed(Key.DOWN)) {
@@ -272,8 +307,9 @@ class MenuScene extends Scene
 
 		for (choice in _songsChoices) {
 			choice.visible = true;
+			choice.originX = choice.textWidth / 2;
 		}
-		_cursor.x = kSongsChoiceStartX;
+		_cursor.x = - _songsChoices[_selectedChoice].textWidth / 2 + _songsChoices[_selectedChoice].x;
 		_cursor.y = kSongsChoiceStartY + _selectedChoice * kSongsChoiceSpacingY;
 
 		if (_fadeTimer > 0) {
@@ -349,6 +385,8 @@ class MenuScene extends Scene
 	override public function update() 
 	{
 		super.update();
+		
+		HandleBackdrops();
 		
 		for (choice in _mainChoices) {
 			choice.visible = false;

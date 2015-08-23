@@ -114,18 +114,21 @@ class MainScene extends Scene
 		addGraphic(MainEmitter, -500);
 		
 		// Add score.
-		_scoreText.x = HXP.halfWidth - 50;
+		_scoreText.x = HXP.halfWidth;
 		_scoreText.y = 220;
-		_chainText.x = HXP.halfWidth - 50;
+		_chainText.x = HXP.halfWidth;
 		_chainText.y = 240;
-		_levelText.x = HXP.halfWidth - 50;
+		_levelText.x = HXP.halfWidth;
 		_levelText.y = 200;
 
 		if (!Song.CurrentSong.IsTutorial) {
 			addGraphic(_scoreText, -600);
 			addGraphic(_chainText, -600);
+			ShadowText.Create(_scoreText, -600);
+			ShadowText.Create(_chainText, -600);
 		}
 		addGraphic(_levelText, -600);
+		ShadowText.Create(_levelText, -600);
 		
 		for (i in 0...5) {
 			var star = new Spritemap("img/star.png", 17, 17);
@@ -208,6 +211,9 @@ class MainScene extends Scene
 		_scoreText.text = "Score: " + Score + "/" + Song.CurrentSong.MaxScore;
 		_chainText.text = "Chain: " + Chain;
 		
+		_scoreText.originX = _scoreText.textWidth / 2;
+		_chainText.originX = _chainText.textWidth / 2;
+		
 		switch(Level)
 		{
 			case 1:
@@ -227,6 +233,7 @@ class MainScene extends Scene
 			case 8:
 				_levelText.text = "ARST";
 		}
+		_levelText.originX = _levelText.textWidth / 2;
 		
 		for (i in 0...5) {
 			var star:Spritemap = _stars[i];
