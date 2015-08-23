@@ -31,7 +31,7 @@ class MenuScene extends Scene
 	private static var _scrollRate2:Float = 0.1;
 	
 	// TODO
-	var _music:Sfx = Sound.Load("sfx/level1");
+	var _music:Sfx = Sound.Load("sfx/menu");
 	static var _state:String = "main";
 	static var _selectedChoice:Int = 0;
 
@@ -91,7 +91,7 @@ class MenuScene extends Scene
 		title.originX = title.textWidth / 2;
 		title.smooth = false;
 		addGraphic(title);
-		var title2:Text = new Text("by DDRKirby(ISQ)", 250, 75);
+		var title2:Text = new Text("by DDRKirby(ISQ)", 250, 80);
 		title2.size = 8;
 		title2.originX = title2.textWidth / 2;
 		title2.smooth = false;
@@ -301,13 +301,13 @@ class MenuScene extends Scene
 		}
 		_songsChoices[0].text = "Tutorial 1 - Welcome to Melody Muncher";
 		_songsChoices[1].text = "Level 1 - arst (Score: " + scoreArray[0] + "/" + maxScoreArray[0] + ")";
-		_songsChoices[1].text = "Level 2 - arst (Score: " + scoreArray[8] + "/" + maxScoreArray[8] + ")";
-		_songsChoices[2].text = "Tutorial 2 - Armored Enemies";
-		_songsChoices[3].text = "Level 3 - arst (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
-		_songsChoices[4].text = "Tutorial 3 - Split Munch";
-		_songsChoices[5].text = "Level 4 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
-		_songsChoices[6].text = "Tutorial 4 - Teleporters";
-		_songsChoices[7].text = "Level 5 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
+		_songsChoices[2].text = "Level 2 - arst (Score: " + scoreArray[8] + "/" + maxScoreArray[8] + ")";
+		_songsChoices[3].text = "Tutorial 2 - Armored Enemies";
+		_songsChoices[4].text = "Level 3 - arst (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
+		_songsChoices[5].text = "Tutorial 3 - Split Munch";
+		_songsChoices[6].text = "Level 4 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
+		_songsChoices[7].text = "Tutorial 4 - Teleporters";
+		_songsChoices[8].text = "Level 5 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 
 		for (choice in _songsChoices) {
 			choice.visible = true;

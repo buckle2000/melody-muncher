@@ -43,6 +43,13 @@ class Player extends Entity
 	{
 		super.update();
 		
+		if (MainScene.Instance == null) {
+			// don't do anything in intro scene.
+			_spritemap.originX = _spritemap.width / 2 + (_spritemap.flipped ? 0 : 1);
+			_spritemap.play("idle");
+			return;
+		}
+		
 		// Handle input.
 		HandleInput();
 
@@ -115,6 +122,8 @@ class Player extends Entity
 	
 	private function SetupAnimations():Void
 	{
+		_spritemap.add("intro", [0, 0, 0, 0, 0, 0, 0, 0, 1], 15, true);
+
 		_spritemap.add("idle", [0], 30, true);
 		_spritemap.add("bounce", [1], 30, true);
 		_spritemap.add("attackprep", [2], 30, true);
