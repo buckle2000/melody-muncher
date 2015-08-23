@@ -149,7 +149,7 @@ class JukeboxScene extends Scene
 		}
 		
 		for (i in 0..._musics.length) {
-			if (i == _selectedChoice) {
+			if (_musics[i].playing) {
 				_choices[i].color = 0xFFFF00;
 			} else {
 				_choices[i].color = 0xFFFFFF;
@@ -162,9 +162,17 @@ class JukeboxScene extends Scene
 		if (_fadeTimer > 0) {
 			// we are fading, just do the fade and nothing else.
 			_fader.alpha += 1 / kFadeoutDuration;
+
+			// fade music.
+			for (i in 0..._musics.length) {
+				_musics[i].volume = 1.0 - _fader.alpha;
+			}
 			
 			if (_fadeTimer > kFadeoutDuration) {
 				HXP.scene = new MenuScene();
+				for (i in 0..._musics.length) {
+					_musics[i].stop();
+				}
 				return;
 			}
 			
@@ -188,6 +196,22 @@ class JukeboxScene extends Scene
 				// back.
 				_fadeTimer++;
 				Sound.Load("sfx/startgame").play();
+			} else {
+				// Look for a playing song, if there is one, stop it.
+				Sound.Load("sfx/cursor").play();
+				var playing:Bool = false;
+				for (i in 0..._musics.length) {
+					if (_musics[i].playing) {
+						_musics[i].stop();
+						if (i == _selectedChoice) {
+							playing = true;
+						}
+					}
+				}
+				if (!playing) {
+					// Start music.
+					_musics[_selectedChoice].play();
+				}
 			}
 		}
 	}
