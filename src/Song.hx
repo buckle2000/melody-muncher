@@ -12,7 +12,7 @@ class Song
 	public static inline var kMusicVolume:Float = 0.8;
 	
 	// TODO: lag calibration in menu
-	public static var LagCalibration:Float = 0.075;
+	public static var LagCalibration:Float = 0.0;
 	
 	// For one side of the timing window.
 	public static inline var kDefaultTimingWindow:Float = 0.2;
@@ -38,13 +38,24 @@ class Song
 "........ ........ 1.1..... 1.1..... ........ ........ 1.1..... 1.1....." +
 "..1...1. 1.1..... ....1.1. 1...1.1. ....1.1. ..1.1... 1...1... 1.......";
 	
-	private static var _levelsLeft:Array<String> = [_level1Left];
-	private static var _levelsRight:Array<String> = [_level1Right];
+	private static var _level2Left:String =
+"........ ........ ........ ........" +
+"........ 2....... 2....... ........" +
+"........ 2.....1. ......1. 2......." +
+"2.1..... 2.1..... ....2.1. ....2...";
+	private static var _level2Right:String =
+"........ ........ ........ ........" +
+"2....... ........ ........ 2......." +
+"2.....1. ........ 2....... ......1." +
+"....2.1. ....1.1. 2.1..... 2.1...2.";
 	
-	private static var _levelSfxNames:Array<String> = ["sfx/level1"];
-	private static var _levelsBeatDivision:Array<Float> = [2.0];
-	private static var _levelBpms:Array<Float> = [125.0];
-	private static var _levelBeatPixelLengths:Array<Float> = [80.0];
+	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left];
+	private static var _levelsRight:Array<String> = [_level1Right, _level2Right];
+	
+	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2"];
+	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0];
+	private static var _levelBpms:Array<Float> = [125.0, 115.0];
+	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0];
 	
 	private static inline var kBounceTime:Float = 0.1;
 	
@@ -95,6 +106,10 @@ class Song
 				// Do nothing.
 			case "1":
 				var enemy:BasicEnemy = MainScene.Instance.create(BasicEnemy);
+				enemy.Reset(beat, left);
+				EnemyList(left).push(enemy);
+			case "2":
+				var enemy:StrongEnemy = MainScene.Instance.create(StrongEnemy);
 				enemy.Reset(beat, left);
 				EnemyList(left).push(enemy);
 			default:
@@ -163,6 +178,7 @@ class Song
 	
 	public function EnemyToHit(left:Bool):Enemy
 	{
+		trace(CurrentBeat());
 		var enemyList = EnemyList(left);
 		
 		for (enemy in enemyList) {

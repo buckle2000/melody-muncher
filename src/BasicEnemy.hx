@@ -30,7 +30,20 @@ class BasicEnemy extends Enemy
 	override public function Hit():Void 
 	{
 		super.Hit();
+		Sound.Load("sfx/munchnormal").play();
 		
 		Destroy();
 	}
+	
+	override public function update():Void 
+	{
+		super.update();
+		
+		if (Song.CurrentSong.ShouldBounce()) {
+			_spritemap.color = 0x808080;
+		} else {
+			_spritemap.color = 0xFFFFFF;
+		}
+	}
+	
 }

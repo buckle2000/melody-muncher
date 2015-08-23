@@ -81,8 +81,8 @@ class Player extends Entity
 		_spritemap.add("idle", [0], 30, true);
 		_spritemap.add("bounce", [1], 30, true);
 		_spritemap.add("attackprep", [1], 30, true);
-		_spritemap.add("attackright", [3], 10, false);
-		_spritemap.add("attackboth", [3], 10, false);
+		_spritemap.add("attackright", [3, 4, 4], 15, false);
+		_spritemap.add("attackboth", [3, 4, 4], 15, false);
 		_spritemap.play("idle");
 	}
 	
@@ -122,6 +122,8 @@ class Player extends Entity
 		var enemy:Enemy = Song.CurrentSong.EnemyToHit(true);
 		if (enemy != null) {
 			enemy.Hit();
+		} else {
+			Sound.Load("sfx/miss").play();
 		}
 	}
 	private function AttackRight():Void
@@ -132,6 +134,8 @@ class Player extends Entity
 		var enemy:Enemy = Song.CurrentSong.EnemyToHit(false);
 		if (enemy != null) {
 			enemy.Hit();
+		} else {
+			Sound.Load("sfx/miss").play();
 		}
 	}
 	private function AttackBoth():Void
@@ -145,6 +149,9 @@ class Player extends Entity
 		var enemyRight:Enemy = Song.CurrentSong.EnemyToHit(false);
 		if (enemyRight != null) {
 			enemyRight.Hit();
+		}
+		if (enemyLeft == null && enemyRight == null) {
+			Sound.Load("sfx/miss").play();
 		}
 	}
 }
