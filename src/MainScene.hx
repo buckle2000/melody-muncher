@@ -134,6 +134,23 @@ class MainScene extends Scene
 		// Add particles.
 		addGraphic(MainEmitter, -500);
 		
+		// Add tutorials.
+		var tutorialImage:Image = null;
+		switch(Level)
+		{
+			case 4:
+				tutorialImage = new Image("img/tutorial1.png");
+			case 5:
+				tutorialImage = new Image("img/tutorial2.png");
+			case 6:
+				tutorialImage = new Image("img/tutorial3.png");
+			case 7:
+				tutorialImage = new Image("img/tutorial4.png");
+		}
+		if (tutorialImage != null) {
+			addGraphic(tutorialImage, -600, 0, 0);
+		}
+		
 		// Add score.
 		_scoreText.x = HXP.halfWidth;
 		_scoreText.y = 220;
@@ -249,13 +266,13 @@ class MainScene extends Scene
 			case 3:
 				_levelText.text = "ARST";
 			case 4:
-				_levelText.text = "ARST";
+				_levelText.text = "";
 			case 5:
-				_levelText.text = "ARST";
+				_levelText.text = "";
 			case 6:
-				_levelText.text = "ARST";
+				_levelText.text = "";
 			case 7:
-				_levelText.text = "ARST";
+				_levelText.text = "";
 			case 8:
 				_levelText.text = "ARST";
 		}

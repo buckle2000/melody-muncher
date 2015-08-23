@@ -187,6 +187,14 @@ class MenuScene extends Scene
 		_cursor.x = - _mainChoices[_selectedChoice].textWidth / 2 + _mainChoices[_selectedChoice].x;
 		_cursor.y = kMainChoiceStartY + _selectedChoice * kMainChoiceSpacingY;
 
+		for (i in 0..._mainChoices.length) {
+			if (i == _selectedChoice) {
+				_mainChoices[i].color = 0xFFFF00;
+			} else {
+				_mainChoices[i].color = 0xFFFFFF;
+			}
+		}
+
 		if (_fadeTimer > 0) {
 			// we are fading, just do the fade and nothing else.
 			_music.volume -= Song.kMusicVolume / kFadeoutDuration;
@@ -241,6 +249,15 @@ class MenuScene extends Scene
 		_cursor.x = - _difficultyChoices[_selectedChoice].textWidth / 2 + _difficultyChoices[_selectedChoice].x;
 		_cursor.y = kDifficultyChoiceStartY + _selectedChoice * kDifficultyChoiceSpacingY;
 
+		for (i in 0..._difficultyChoices.length) {
+			if (i == _selectedChoice) {
+				_difficultyChoices[i].color = 0xFFFF00;
+			} else {
+				_difficultyChoices[i].color = 0xFFFFFF;
+			}
+		}
+
+		
 		if (Input.pressed(Key.DOWN)) {
 			_selectedChoice++;
 			_selectedChoice = (_selectedChoice + _difficultyChoices.length) % _difficultyChoices.length;
@@ -309,6 +326,14 @@ class MenuScene extends Scene
 		_songsChoices[7].text = "Tutorial 4 - Teleporters";
 		_songsChoices[8].text = "Level 5 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 
+		for (i in 0..._songsChoices.length) {
+			if (i == _selectedChoice) {
+				_songsChoices[i].color = 0xFFFF00;
+			} else {
+				_songsChoices[i].color = 0xFFFFFF;
+			}
+		}
+		
 		for (choice in _songsChoices) {
 			choice.visible = true;
 			choice.originX = choice.textWidth / 2;
@@ -330,21 +355,24 @@ class MenuScene extends Scene
 						// level 1
 						HXP.scene = new MainScene(1);
 					case 2:
+						// level 2
+						HXP.scene = new MainScene(9);
+					case 3:
 						// Tutorial 2
 						HXP.scene = new MainScene(5);
-					case 3:
+					case 4:
 						// level 2
 						HXP.scene = new MainScene(2);
-					case 4:
+					case 5:
 						// Tutorial 3
 						HXP.scene = new MainScene(6);
-					case 5:
+					case 6:
 						// level 3
 						HXP.scene = new MainScene(3);
-					case 6:
+					case 7:
 						// tutorial 4
 						HXP.scene = new MainScene(7);
-					case 7:
+					case 8:
 						// level 4
 						HXP.scene = new MainScene(8);
 					default:
