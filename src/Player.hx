@@ -15,12 +15,17 @@ class Player extends Entity
 {
 	// Only one frame of attack prep for now.
 	private static inline var kAttackPrepTime:Float = 0.00;
+
+	// Amount of beats to miss for.
+	private static inline var kMissBeats:Float = 0.50;
 	
 	private var _spritemap:Spritemap = new Spritemap("img/player.png", 150, 100);
 	
 	private var _attackPrepStartTime:Float;
 	private var _attackPrepLeftPressed:Bool;
 	private var _attackPrepRightPressed:Bool;
+	
+	private var _missStartBeat:Float;
 	
 	public function new()
 	{
@@ -55,7 +60,7 @@ class Player extends Entity
 	{
 		if (_spritemap.currentAnim == "missright" || _spritemap.currentAnim == "missboth" ||
 		_spritemap.currentAnim == "bothmissleft" || _spritemap.currentAnim == "bothmissright") {
-			if (_spritemap.complete) {
+			if (Song.CurrentSong.CurrentBeat() - _missStartBeat >= kMissBeats) {
 				_spritemap.play(Song.CurrentSong.ShouldBounce() ? "bounce" : "idle");
 			}
 		}
@@ -142,6 +147,7 @@ class Player extends Entity
 		} else {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("missright");
+			_missStartBeat = Song.CurrentSong.CurrentBeat();
 		}
 	}
 	private function AttackRight():Void
@@ -155,6 +161,7 @@ class Player extends Entity
 		} else {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("missright");
+			_missStartBeat = Song.CurrentSong.CurrentBeat();
 		}
 	}
 	private function AttackBoth():Void
@@ -172,14 +179,17 @@ class Player extends Entity
 		if (enemyLeft == null && enemyRight == null) {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("missboth");
+			_missStartBeat = Song.CurrentSong.CurrentBeat();
 		} else if (enemyLeft == null) {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("bothmissleft");
 			_spritemap.flipped = false;
+			_missStartBeat = Song.CurrentSong.CurrentBeat();
 		} else if (enemyRight == null) {
 			Sound.Load("sfx/miss").play();
 			_spritemap.play("bothmissright");
 			_spritemap.flipped = false;
+			_missStartBeat = Song.CurrentSong.CurrentBeat();
 		}
 	}
 }
