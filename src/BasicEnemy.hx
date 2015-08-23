@@ -9,13 +9,15 @@ import com.haxepunk.graphics.Spritemap;
  */
 class BasicEnemy extends Enemy
 {
-	private var _spritemap:Spritemap = new Spritemap("img/basicenemy.png", 16, 24);
+	private var _spritemap:Spritemap = new Spritemap("img/basicenemy.png", 24, 24);
 
 	public function new()
 	{
 		super(_spritemap);
 		_spritemap.originX = _spritemap.width / 2;
 		_spritemap.originY = _spritemap.height;
+		_spritemap.add("walk", [0, 1], 5);
+		_spritemap.play("walk");
 	}
 	
 	override public function Reset(beat:Float, left:Bool)
