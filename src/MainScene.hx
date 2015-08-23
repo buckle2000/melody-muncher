@@ -224,6 +224,8 @@ class MainScene extends Scene
 				_levelText.text = "ARST";
 			case 7:
 				_levelText.text = "ARST";
+			case 8:
+				_levelText.text = "ARST";
 		}
 		
 		for (i in 0...5) {

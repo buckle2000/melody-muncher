@@ -9,7 +9,7 @@ import com.haxepunk.graphics.Spritemap;
  */
 class TeleportEnemy extends Enemy
 {
-	private var _spritemap:Spritemap = new Spritemap("img/strongenemy.png", 32, 32);
+	private var _spritemap:Spritemap = new Spritemap("img/teleportenemy.png", 24, 24);
 	private var _firstHit:Bool = false;
 
 	public function new()
@@ -17,8 +17,8 @@ class TeleportEnemy extends Enemy
 		super(_spritemap);
 		_spritemap.originX = _spritemap.width / 2;
 		_spritemap.originY = _spritemap.height;
-		_spritemap.add("walk", [0, 1], 5);
-		_spritemap.add("walk2", [2, 3], 5);
+		_spritemap.add("walk", [0], 5);
+		_spritemap.add("walk2", [0], 5);
 		_spritemap.play("walk");
 	}
 	
@@ -45,7 +45,7 @@ class TeleportEnemy extends Enemy
 		} else {
 			MainScene.Instance.Score++;
 			MainScene.Instance.AddChain();
-			Sound.Load("sfx/munchstrong1").play();
+			Sound.Load("sfx/teleporthit1").play();
 			_firstHit = true;
 			_spritemap.play("walk2");
 			// Move back.

@@ -34,14 +34,14 @@ class MenuScene extends Scene
 	static inline var kMainChoiceSpacingY = 15;
 
 	var _difficultyChoices:Array<Text> = new Array<Text>();
-	static inline var kDifficultyChoiceStartX = 250-45;
+	static inline var kDifficultyChoiceStartX = 250-55;
 	static inline var kDifficultyChoiceStartY = 170;
 	static inline var kDifficultyChoiceSpacingY = 15;
 	
 	var _songsChoices:Array<Text> = new Array<Text>();
-	static inline var kSongsChoiceStartX = 250-45;
-	static inline var kSongsChoiceStartY = 170;
-	static inline var kSongsChoiceSpacingY = 15;
+	static inline var kSongsChoiceStartX = 250-60;
+	static inline var kSongsChoiceStartY = 150;
+	static inline var kSongsChoiceSpacingY = 12;
 	
 	var _cursor:Image = new Image("img/cursor.png");
 
@@ -116,6 +116,7 @@ class MenuScene extends Scene
 		_songsChoices.push(new Text("Tutorial 3 - Split Munch"));
 		_songsChoices.push(new Text("Level 3 - arst: " + Scores1[2] + "/" + MaxScores1[2]));
 		_songsChoices.push(new Text("Tutorail 4"));
+		_songsChoices.push(new Text("level 4"));
 		_songsChoices.push(new Text("Back"));
 		for (i in 0..._songsChoices.length) {
 			_songsChoices[i].y = kSongsChoiceStartY + kSongsChoiceSpacingY * i;
@@ -267,6 +268,7 @@ class MenuScene extends Scene
 		_songsChoices[4].text = "Tutorial 3 - Split Munch";
 		_songsChoices[5].text = "Level 3 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
 		_songsChoices[6].text = "Tutorial 4 - Teleporters";
+		_songsChoices[7].text = "Level 4 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 
 		for (choice in _songsChoices) {
 			choice.visible = true;
@@ -302,6 +304,9 @@ class MenuScene extends Scene
 					case 6:
 						// tutorial 4
 						HXP.scene = new MainScene(7);
+					case 7:
+						// level 4
+						HXP.scene = new MainScene(8);
 					default:
 						trace("reawftnuynoaw");
 				}
