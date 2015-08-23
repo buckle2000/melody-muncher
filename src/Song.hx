@@ -24,7 +24,7 @@ class Song
 	var _addedLength:Float = 0;
 	
 	var _bpm:Float;
-	var _sfx:Sfx;
+	public var _sfx:Sfx;
 	var _beatPixelLength:Float;
 	var _endBeat:Float;
 

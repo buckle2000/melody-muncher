@@ -183,8 +183,13 @@ class MainScene extends Scene
 		if (Song.CurrentSong.IsDone() || _fadeOutFader.alpha > 0.0) {
 			_fadeOutFader.alpha += 1.0 / kFadeDuration;
 			
+			Song.CurrentSong._sfx.volume = 1.0 - _fadeOutFader.alpha;
+			
 			if (_fadeOutFader.alpha >= 1.0) {
 				HXP.scene = new MenuScene();
+				
+				Song.CurrentSong._sfx.stop();
+				
 				if (MenuScene.Difficulty == 0) {
 					MenuScene.Scores1[Level - 1] = Score;
 				}

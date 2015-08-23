@@ -15,7 +15,7 @@ class ShadowText extends Entity
 	private var _orig:Text;
 	private var _offsetX:Int;
 	private var _offsetY:Int;
-	private var _text:Text = new Text();
+	private var _text:Text;
 
 	public static function Create(text:Text, layer:Int = 0)
 	{
@@ -32,9 +32,10 @@ class ShadowText extends Entity
 		text3.layer = layer + 1;
 		text4.layer = layer + 1;
 	}
-	
+
 	public function Reset(text:Text, offsetX:Int, offsetY:Int)
 	{
+		_text = new Text("", 0, 0, text.width, text.height);
 		_graphic = _text;
 		_offsetX = offsetX;
 		_offsetY = offsetY;
@@ -54,6 +55,7 @@ class ShadowText extends Entity
 		_text.originX = _orig.originX;
 		_text.originY = _orig.originY;
 		_text.visible = _orig.visible;
+		_text.wordWrap = _orig.wordWrap;
 	}
 	
 }

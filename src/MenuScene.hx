@@ -52,8 +52,10 @@ class MenuScene extends Scene
 	
 	var _cursor:Image = new Image("img/cursor.png");
 
+	var _faderIn:Image = new Image("img/white.png");
 	var _fader:Image = new Image("img/white.png");
-	static inline var kFadeoutDuration = 120;
+	static inline var kFadeoutDuration = 90;
+	static inline var kFadeinDuration = 120;
 	var _fadeTimer:Int = 0;
 	
 	override public function begin() 
@@ -81,8 +83,6 @@ class MenuScene extends Scene
 		addGraphic(_scrollBackground1, 500);
 		_scrollBackground2 = new Backdrop("img/level1_scroll2.png");
 		addGraphic(_scrollBackground2, 600);
-		HandleBackdrops();
-		
 		
 		//addGraphic(new Image("img/menu.png"));
 		
@@ -159,7 +159,10 @@ class MenuScene extends Scene
 		_fader.scale = 1100;
 		_fader.color = 0x000000;
 		_fader.alpha = 0;
-		addGraphic(_fader);
+		addGraphic(_fader, -1000);
+		_faderIn.scale = 1100;
+		_faderIn.color = 0x000000;
+		_faderIn.alpha = 1;
 		
 		var flash:ScreenFlash = create(ScreenFlash);
 		flash.Reset(0x000000, 1, 0.05);
@@ -194,8 +197,7 @@ class MenuScene extends Scene
 						// jukebox
 						_music.stop();
 						
-						// TODO
-						HXP.scene = new MenuScene();
+						HXP.scene = new JukeboxScene();
 				}
 				return;
 			}
@@ -387,6 +389,8 @@ class MenuScene extends Scene
 		super.update();
 		
 		HandleBackdrops();
+		
+		_faderIn.alpha -= 1.0 / kFadeinDuration;
 		
 		for (choice in _mainChoices) {
 			choice.visible = false;
