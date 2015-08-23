@@ -31,6 +31,11 @@ class MenuScene extends Scene
 	static inline var kDifficultyChoiceStartY = 170;
 	static inline var kDifficultyChoiceSpacingY = 15;
 	
+	var _songsChoices:Array<Text> = new Array<Text>();
+	static inline var kSongsChoiceStartX = 250-45;
+	static inline var kSongsChoiceStartY = 170;
+	static inline var kSongsChoiceSpacingY = 15;
+	
 	var _cursor:Image = new Image("img/cursor.png");
 
 	var _fader:Image = new Image("img/white.png");
@@ -81,6 +86,21 @@ class MenuScene extends Scene
 			_difficultyChoices[i].size = 8;
 			addGraphic(_difficultyChoices[i]);
 			_difficultyChoices[i].smooth = false;
+		}
+
+		_songsChoices.push(new Text("Tutorial 1 - Welcome to Melody Muncher"));
+		_songsChoices.push(new Text("Level 1 - arst"));
+		_songsChoices.push(new Text("Tutorial 2 - Armored Enemies"));
+		_songsChoices.push(new Text("Level 2 - arst"));
+		_songsChoices.push(new Text("Tutorial 3 - Split Munch"));
+		_songsChoices.push(new Text("Level 3 - arst"));
+		_songsChoices.push(new Text("Back"));
+		for (i in 0..._songsChoices.length) {
+			_songsChoices[i].y = kSongsChoiceStartY + kSongsChoiceSpacingY * i;
+			_songsChoices[i].x = kSongsChoiceStartX;
+			_songsChoices[i].size = 8;
+			addGraphic(_songsChoices[i]);
+			_songsChoices[i].smooth = false;
 		}
 		
 		_cursor.x = kMainChoiceStartX;
@@ -197,6 +217,70 @@ class MenuScene extends Scene
 		}
 	}
 	
+	private function SongsUpdate()
+	{
+		for (choice in _songsChoices) {
+			choice.visible = true;
+		}
+		_cursor.x = kSongsChoiceStartX;
+		_cursor.y = kSongsChoiceStartY + _selectedChoice * kSongsChoiceSpacingY;
+
+		if (_fadeTimer > 0) {
+			// we are fading, just do the fade and nothing else.
+			_music.volume -= Song.kMusicVolume / kFadeoutDuration;
+			_fader.alpha += 1 / kFadeoutDuration;
+			
+			if (_fadeTimer > kFadeoutDuration) {
+				switch(_selectedChoice) {
+					case 1:
+						// Tutorial 1
+						HXP.scene = new MainScene(1);
+					case 2:
+						// level 1
+						HXP.scene = new MainScene(1);
+					case 3:
+						// Tutorial 2
+						HXP.scene = new MainScene(2);
+					case 4:
+						// level 2
+						HXP.scene = new MainScene(2);
+					case 5:
+						// Tutorial 3
+						HXP.scene = new MainScene(3);
+					case 6:
+						// level 3
+						HXP.scene = new MainScene(3);
+				}
+				return;
+			}
+			
+			_fadeTimer++;
+			return;
+		}
+		
+		if (Input.pressed(Key.DOWN)) {
+			_selectedChoice++;
+			_selectedChoice = (_selectedChoice + _songsChoices.length) % _songsChoices.length;
+			Sound.Load("sfx/cursor").play();
+		}
+		if (Input.pressed(Key.UP)) {
+			_selectedChoice--;
+			_selectedChoice = (_selectedChoice + _songsChoices.length) % _songsChoices.length;
+			Sound.Load("sfx/cursor").play();
+		}
+		
+		if (Input.pressed(Key.ENTER) || Input.pressed(Key.SPACE)) {
+			if (_selectedChoice == _songsChoices.length - 1) {
+				_state = "difficulty";
+				_selectedChoice = Difficulty;
+				Sound.Load("sfx/cursor").play();
+			} else {
+				_fadeTimer++;
+				Sound.Load("sfx/cursor").play();
+			}
+		}
+	}
+	
 	override public function update() 
 	{
 		super.update();
@@ -207,11 +291,16 @@ class MenuScene extends Scene
 		for (choice in _difficultyChoices) {
 			choice.visible = false;
 		}
+		for (choice in _songsChoices) {
+			choice.visible = false;
+		}
 		
 		if (_state == "main") {
 			MainUpdate();
 		} else if (_state == "difficulty") {
 			DifficultyUpdate();
+		} else if (_state == "songs") {
+			SongsUpdate();
 		}
 	}
 }
