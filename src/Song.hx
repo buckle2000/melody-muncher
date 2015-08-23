@@ -68,13 +68,32 @@ class Song
 "........ 2.....1. ......1. 2......." +
 "1.......";
 	
-	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left];
-	private static var _levelsRight:Array<String> = [_level1Right, _level2Right];
+	private static var _level3Left:String =
+"........ ........ ........ ........" +
+
+"1.....1. 1....... 1....... 1...1..." + "1....... 1....... 1.....2. 1...1..." +
+"1.1..... 1...1.1. 1....... ........" + "1...1.1. 1.1..... 1....... ........" +
+"1.1..... 1...1.1. 1.1.2.1. ........" + "1...1.1. 1.1..... ........ 1.1.2.1." +
+"1....... 1....... 1.....1. 1...1..." + "1.....2. 1....... 1....... 1...1..." +
+
+"........";
+	private static var _level3Right:String =
+"........ ........ ........ ........" +
+
+"1....... 1....... 1.....1. 1...1..." + "1.....2. 1....... 1....... 1...1..." +
+"1...1.1. 1.1..... 1....... ........" + "1.1..... 1...1.1. 1....... ........" +
+"1...1.1. 1.1..... ........ 1.1.2.1." + "1.1..... 1...1.1. 1.1.2.1. ........" +
+"1.....1. 1....... 1....... 1...1..." + "1....... 1....... 1.....2. 1...1..." +
+
+"........";
 	
-	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2"];
-	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0];
-	private static var _levelBpms:Array<Float> = [125.0, 115.0];
-	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0];
+	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left, _level3Left];
+	private static var _levelsRight:Array<String> = [_level1Right, _level2Right, _level3Right];
+	
+	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2", "sfx/level3"];
+	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0, 2.0];
+	private static var _levelBpms:Array<Float> = [125.0, 115.0, 130.0];
+	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0, 90.0];
 	
 	private static inline var kBounceTime:Float = 0.1;
 	

@@ -73,7 +73,7 @@ class MainScene extends Scene
 		// Load level.
 		ThisSong = Song.LoadLevel(Level);
 		
-		if (Level == 1 || Level == 2) {
+		if (Level == 1 || Level == 2 || Level == 3) {
 			addGraphic(new Image("img/level1_fore.png"), 100);
 			addGraphic(new Image("img/level1_back.png"), 1000);
 			_scrollBackground1 = new Backdrop("img/level1_scroll1.png");
