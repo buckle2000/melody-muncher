@@ -135,6 +135,7 @@ class MenuScene extends Scene
 
 		_songsChoices.push(new Text("Tutorial 1 - Welcome to Melody Muncher"));
 		_songsChoices.push(new Text("Level 1 - arst: " + Scores1[0] + "/" + MaxScores1[0]));
+		_songsChoices.push(new Text("Level 1.5 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
 		_songsChoices.push(new Text("Tutorial 2 - Armored Enemies"));
 		_songsChoices.push(new Text("Level 2 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
 		_songsChoices.push(new Text("Tutorial 3 - Split Munch"));
@@ -300,12 +301,13 @@ class MenuScene extends Scene
 		}
 		_songsChoices[0].text = "Tutorial 1 - Welcome to Melody Muncher";
 		_songsChoices[1].text = "Level 1 - arst (Score: " + scoreArray[0] + "/" + maxScoreArray[0] + ")";
+		_songsChoices[1].text = "Level 2 - arst (Score: " + scoreArray[8] + "/" + maxScoreArray[8] + ")";
 		_songsChoices[2].text = "Tutorial 2 - Armored Enemies";
-		_songsChoices[3].text = "Level 2 - arst (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
+		_songsChoices[3].text = "Level 3 - arst (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
 		_songsChoices[4].text = "Tutorial 3 - Split Munch";
-		_songsChoices[5].text = "Level 3 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
+		_songsChoices[5].text = "Level 4 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
 		_songsChoices[6].text = "Tutorial 4 - Teleporters";
-		_songsChoices[7].text = "Level 4 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
+		_songsChoices[7].text = "Level 5 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 
 		for (choice in _songsChoices) {
 			choice.visible = true;

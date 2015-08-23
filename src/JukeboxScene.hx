@@ -48,7 +48,9 @@ class JukeboxScene extends Scene
 	Sound.Load("sfx/level5"),
 	Sound.Load("sfx/level6"),
 	Sound.Load("sfx/level7"),
-	Sound.Load("sfx/level8")];
+	Sound.Load("sfx/level8"),
+	Sound.Load("sfx/level9")
+	];
 	
 	private var _descriptions:Array<String> = [
 	"arst1",
@@ -58,7 +60,8 @@ class JukeboxScene extends Scene
 	"arst5",
 	"arst6",
 	"arst7",
-	"arst8"
+	"arst8",
+	"arst9"
 	];
 	
 	override public function begin() 

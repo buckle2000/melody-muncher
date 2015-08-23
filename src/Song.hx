@@ -149,18 +149,47 @@ class Song
 
 "........";
 
-	public static var NumSongs:Int = 8;
+	private static var _level9Left:String =
+"........ ........ ........ ........" +
+
+"1....... 1....... ....1... ....1... 1....... 1.....1. ....1.1. ........ ....1.1. ....1... 1....... 1......." +
+
+"....1... ........ 1...1... ........ ........ ....1... ..1.1... ....1.1." +
+"....1... ..1..... 1....... ....1... 1....... ....1... 1....... 1......." +
+
+"....1.1. ..1.1... 1....... ........ 1....... 1.1...1. 1....... ....1..." +
+"1....... ....1.1. ..1...1. 1...1... ....1... 1.1..... ..1..1.. 1.....1." +
+
+"..1..1.. ........ ..1...1. ........ ..1..... ......1. ..1..... ......1." +
+
+"........ ........ ........ ........";
+	private static var _level9Right:String =
+"........ ........ ........ ........" +
+
+"....1... ....1... 1....... 1.....1. ....1.1. ....1... 1....... 1....... 1....... 1.....1. ....1.1. ........" +
+
+"........ ....1... ..1..... ........ ....1... ........ 1.....1. ..1....." +
+"1....... ....1.1. ....1... ..1...1. ....1... 1....... ....1... ....1..." +
+
+"1.1..... 1.....1. ........ 1...1... ........ ....1... ....1... 1.1...1." +
+"........ 1....... 1...1... ..1...1. 1....... ....1.1. 1.....1. ..1.1..." +
+
+"........ ..1...1. ........ ..1...1. ......1. ..1..... ......1. ..1....." +
+
+"........ ........ ........ ........";
+
+	public static var NumSongs:Int = 9;
 	public var LevelNumber:Int;
-	private static var _tutorialLevels:Array<Bool> = [false, false, false, true, true, true, true, false];
-	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left, _level3Left, _level4Left, _level5Left, _level6Left, _level7Left, _level8Left];
-	private static var _levelsRight:Array<String> = [_level1Right, _level2Right, _level3Right, _level4Right, _level5Right, _level6Right, _level7Right, _level8Right];
-	private static var _loopLengths:Array<Float> = [0, 0, 0, 8.0, 8.0, 8.0, 8.0, 0.0];
+	private static var _tutorialLevels:Array<Bool> = [false, false, false, true, true, true, true, false, false];
+	private static var _levelsLeft:Array<String> = [_level1Left, _level2Left, _level3Left, _level4Left, _level5Left, _level6Left, _level7Left, _level8Left, _level9Left];
+	private static var _levelsRight:Array<String> = [_level1Right, _level2Right, _level3Right, _level4Right, _level5Right, _level6Right, _level7Right, _level8Right, _level9Right];
+	private static var _loopLengths:Array<Float> = [0, 0, 0, 8.0, 8.0, 8.0, 8.0, 0.0, 0.0];
 	
-	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2", "sfx/level3", "sfx/level4", "sfx/level5", "sfx/level6", "sfx/level7", "sfx/level8"];
-	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0];
-	private static var _levelBpms:Array<Float> = [125.0, 115.0, 130.0, 120.0, 120.0, 120.0, 120.0, 120.0];
-	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0, 90.0, 80.0, 80.0, 80.0, 80.0, 90.0];
-	private static var _levelEndBeats:Array<Float> = [30*4, 37*4, 38*4, 999999, 999999, 999999, 999999, 62*4];
+	private static var _levelSfxNames:Array<String> = ["sfx/level1", "sfx/level2", "sfx/level3", "sfx/level4", "sfx/level5", "sfx/level6", "sfx/level7", "sfx/level8", "sfx/level9"];
+	private static var _levelsBeatDivision:Array<Float> = [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0];
+	private static var _levelBpms:Array<Float> = [125.0, 115.0, 130.0, 120.0, 120.0, 120.0, 120.0, 120.0, 140.0];
+	private static var _levelBeatPixelLengths:Array<Float> = [80.0, 80.0, 90.0, 80.0, 80.0, 80.0, 80.0, 90.0, 70.0];
+	private static var _levelEndBeats:Array<Float> = [30*4, 37*4, 38*4, 999999, 999999, 999999, 999999, 62*4, 58*4];
 	
 	private static inline var kBounceTime:Float = 0.1;
 	
