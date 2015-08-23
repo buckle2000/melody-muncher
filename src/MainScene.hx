@@ -1,12 +1,18 @@
 import com.haxepunk.Entity;
 import com.haxepunk.graphics.Backdrop;
 import com.haxepunk.graphics.Image;
+import com.haxepunk.graphics.Spritemap;
+import com.haxepunk.graphics.Text;
 import com.haxepunk.HXP;
 import com.haxepunk.Scene;
 import com.haxepunk.graphics.Emitter;
+import openfl.media.SoundTransform;
 
 class MainScene extends Scene
 {
+	public var Score:Int = 0;
+	public var Chain:Int = 0;
+	
 	public static var Instance:MainScene;
 	public var ThisPlayer:Player;
 	public var ThisSong:Song;
@@ -15,6 +21,8 @@ class MainScene extends Scene
 	
 	public var MainEmitter:Emitter = new Emitter("img/particles.png", 32, 32);
 
+	private var _stars:Array<Spritemap> = new Array<Spritemap>();
+	
 	private var _shakeIntensity:Int = 0;
 	private var _shakeTime:Int = 0;
 	
@@ -23,6 +31,9 @@ class MainScene extends Scene
 	
 	private var _scrollBackground1:Backdrop;
 	private var _scrollBackground2:Backdrop;
+	
+	private var _scoreText:Text = new Text();
+	private var _chainText:Text = new Text();
 	
 	public static var LeftPosition(get, null):Float;
 	static function get_LeftPosition()
@@ -94,6 +105,28 @@ class MainScene extends Scene
 		// Add particles.
 		addGraphic(MainEmitter, -500);
 		
+		// Add score.
+		addGraphic(_scoreText, -600);
+		_scoreText.x = HXP.halfWidth - 50;
+		_scoreText.y = 200;
+		addGraphic(_chainText, -600);
+		_chainText.x = HXP.halfWidth - 50;
+		_chainText.y = 220;
+		
+		for (i in 0...5) {
+			var star = new Spritemap("img/star.png", 17, 17);
+			star.add("0", [0]);
+			star.add("1", [1]);
+			star.add("2", [2]);
+			star.add("3", [3]);
+			star.add("4", [4]);
+			star.add("5", [5]);
+			star.add("6", [6]);
+			star.play("0");
+			_stars.push(star);
+			addGraphic(star, -600, HXP.halfWidth - 17 * 2.5 + i * 17, 180);
+		}
+		
 		// Start level.
 		ThisSong.Start();
 	}
@@ -113,6 +146,55 @@ class MainScene extends Scene
 		HandleBackdrops();
 		
 		super.update();
+		
+		HandleScore();
+	}
+	
+	private function HandleScore()
+	{
+		_scoreText.text = "Score: " + Score + "/" + Song.CurrentSong.MaxScore;
+		_chainText.text = "Chain: " + Chain;
+		
+		for (i in 0...5) {
+			var star:Spritemap = _stars[i];
+			
+			if (Score / cast(Song.CurrentSong.MaxScore, Float) >= (i + 1) / 5.0) {
+				star.play("6");
+			} else if (Score / cast(Song.CurrentSong.MaxScore, Float) < (i) / 5.0) {
+				star.play("0");
+			} else {
+				var progress = (Score / cast(Song.CurrentSong.MaxScore, Float)) * 5.0;
+				progress = progress - Math.floor(progress);
+				if (progress >= 0.0) {
+					star.play("0");
+				}
+				if (progress >= 0.16) {
+					star.play("1");
+				}
+				if (progress >= 0.33) {
+					star.play("2");
+				}
+				if (progress >= 0.5) {
+					star.play("3");
+				}
+				if (progress >= 0.66) {
+					star.play("4");
+				}
+				if (progress >= 0.83) {
+					star.play("5");
+				}
+			}
+		}
+	}
+	
+	public function AddChain()
+	{
+		Chain++;
+	}
+
+	public function ResetChain()
+	{
+		Chain = 0;
 	}
 	
 	private function HandleBackdrops()

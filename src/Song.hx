@@ -27,6 +27,8 @@ class Song
 	public var LeftEnemies:Array<Enemy> = new Array<Enemy>();
 	public var RightEnemies:Array<Enemy> = new Array<Enemy>();
 	
+	public var MaxScore:Int = 0;
+	
 	private static var _level1Left:String =
 "........ ........ ........ ........" +
 "1...1... 1...1... ........ ........ 1...1... 1...1... ........ ........" +
@@ -146,14 +148,19 @@ class Song
 				var enemy:BasicEnemy = MainScene.Instance.create(BasicEnemy);
 				enemy.Reset(beat, left);
 				EnemyList(left).push(enemy);
+				MaxScore++;
 			case "2":
 				var enemy:StrongEnemy = MainScene.Instance.create(StrongEnemy);
 				enemy.Reset(beat, left);
 				EnemyList(left).push(enemy);
+				MaxScore++;
+				MaxScore++;
 			case "3":
 				var enemy:TeleportEnemy = MainScene.Instance.create(TeleportEnemy);
 				enemy.Reset(beat, left);
 				EnemyList(left).push(enemy);
+				MaxScore++;
+				MaxScore++;
 			default:
 				trace("unknown char" + char);
 		}

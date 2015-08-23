@@ -40,7 +40,11 @@ class StrongEnemy extends Enemy
 		if (_firstHit) {
 			Destroy();
 			Sound.Load("sfx/munchstrong2").play();
+			MainScene.Instance.Score++;
+			MainScene.Instance.AddChain();
 		} else {
+			MainScene.Instance.Score++;
+			MainScene.Instance.AddChain();
 			Sound.Load("sfx/munchstrong1").play();
 			_firstHit = true;
 			_spritemap.play("walk2");

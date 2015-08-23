@@ -63,6 +63,7 @@ class Enemy extends Entity
 		MainScene.Instance.ThisPlayer.Flash(10);
 		Sound.Load("sfx/hit").play();
 		Destroy();
+		MainScene.Instance.ResetChain();
 	}
 	
 	public function Destroy():Void

@@ -232,22 +232,22 @@ class MenuScene extends Scene
 			
 			if (_fadeTimer > kFadeoutDuration) {
 				switch(_selectedChoice) {
-					case 1:
+					case 0:
 						// Tutorial 1
 						HXP.scene = new MainScene(1);
-					case 2:
+					case 1:
 						// level 1
 						HXP.scene = new MainScene(1);
-					case 3:
+					case 2:
 						// Tutorial 2
 						HXP.scene = new MainScene(2);
-					case 4:
+					case 3:
 						// level 2
 						HXP.scene = new MainScene(2);
-					case 5:
+					case 4:
 						// Tutorial 3
 						HXP.scene = new MainScene(3);
-					case 6:
+					case 5:
 						// level 3
 						HXP.scene = new MainScene(3);
 				}

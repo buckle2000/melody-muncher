@@ -35,6 +35,8 @@ class BasicEnemy extends Enemy
 		Sound.Load("sfx/munchnormal").play();
 		
 		Destroy();
+		MainScene.Instance.Score++;
+		MainScene.Instance.AddChain();
 	}
 	
 	override public function update():Void 
