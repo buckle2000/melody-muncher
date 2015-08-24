@@ -241,6 +241,7 @@ class MenuScene extends Scene
 			_lagCalibrationText.originX = _lagCalibrationText.textWidth / 2;
 			_lagCalibrationText.size = 8;
 			_lagCalibrator.color = 0xFFFF00;
+		} else {
 		}
 
 		_cursor.x = - _mainChoices[_selectedChoice].originX + _mainChoices[_selectedChoice].x;
@@ -497,6 +498,11 @@ class MenuScene extends Scene
 			choice.visible = false;
 		}
 		
+		_lagCalibrator.visible = false;
+		_lagCalibratorTop.visible = false;
+		_lagCalibratorBottom.visible = false;
+		_lagCalibrationText.visible = false;
+
 		if (_state == "main") {
 			MainUpdate();
 		} else if (_state == "difficulty") {

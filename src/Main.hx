@@ -5,7 +5,7 @@ import com.haxepunk.utils.Key;
 
 class Main extends Engine
 {
-	public static inline var kVersion:String = "v1.09";
+	public static inline var kVersion:String = "v1.10";
 
 	override public function init()
 	{
