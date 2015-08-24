@@ -58,6 +58,11 @@ class MenuScene extends Scene
 	static inline var kFadeinDuration = 120;
 	var _fadeTimer:Int = 0;
 	
+	var _lagCalibrationText = new Text("");
+	var _lagCalibrator = new Image("img/play_tracker.png");
+	var _lagCalibratorTop = new Image("img/play_tracker.png");
+	var _lagCalibratorBottom = new Image("img/play_tracker.png");
+	
 	override public function begin() 
 	{
 		if (MaxScores1 == null) {
@@ -164,6 +169,15 @@ class MenuScene extends Scene
 		_cursor.originX = 16;
 		addGraphic(_cursor);
 		
+		addGraphic(_lagCalibrator, -10);
+		addGraphic(_lagCalibratorTop);
+		addGraphic(_lagCalibratorBottom);
+		_lagCalibrator.visible = false;
+		_lagCalibratorTop.visible = false;
+		_lagCalibratorBottom.visible = false;
+		addGraphic(_lagCalibrationText);
+		_lagCalibrationText.visible = false;
+		
 		_fader.scale = 1100;
 		_fader.color = 0x000000;
 		_fader.alpha = 0;
@@ -202,6 +216,31 @@ class MenuScene extends Scene
 		_mainChoices[2].text = "Lag Calibration:   " + Song.LagCalibration + "ms";
 		if (_selectedChoice == 2) {
 			_mainChoices[2].text = "Lag Calibration: < " + Song.LagCalibration + "ms >";
+			
+			var bpm:Float = 115.0;
+			var time:Float = _music.position - Song.LagCalibration / 1000.0;
+			var beat:Float = time * bpm / 60.0;
+			beat = (beat / 2.0 - Math.floor(beat / 2.0)) * 2.0;
+			if (beat > 1.0) {
+				beat = 2.0 - beat;
+			}
+			
+			_lagCalibrator.visible = true;
+			_lagCalibratorTop.visible = true;
+			_lagCalibratorBottom.visible = true;
+			_lagCalibrator.x = 200 + beat * 100;
+			_lagCalibratorTop.x = 200;
+			_lagCalibratorBottom.x = 300;
+			_lagCalibrator.y = 200;
+			_lagCalibratorTop.y = 200;
+			_lagCalibratorBottom.y = 200;
+			_lagCalibrationText.y = 220;
+			_lagCalibrationText.text = "Adjust lag using Left and Right until this matches the beat of the song";
+			_lagCalibrationText.visible = true;
+			_lagCalibrationText.x = 250;
+			_lagCalibrationText.originX = _lagCalibrationText.textWidth / 2;
+			_lagCalibrationText.size = 8;
+			_lagCalibrator.color = 0xFFFF00;
 		}
 
 		_cursor.x = - _mainChoices[_selectedChoice].originX + _mainChoices[_selectedChoice].x;
