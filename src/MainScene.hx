@@ -235,13 +235,13 @@ class MainScene extends Scene
 				Song.CurrentSong._sfx.stop();
 				
 				if (MenuScene.Difficulty == 0) {
-					MenuScene.Scores1[Level - 1] = Score;
+					if (MenuScene.Scores1[Level - 1] < Score) MenuScene.Scores1[Level - 1] = Score;
 				}
 				if (MenuScene.Difficulty == 1) {
-					MenuScene.Scores2[Level - 1] = Score;
+					if (MenuScene.Scores2[Level - 1] < Score) MenuScene.Scores2[Level - 1] = Score;
 				}
 				if (MenuScene.Difficulty == 2) {
-					MenuScene.Scores3[Level - 1] = Score;
+					if (MenuScene.Scores3[Level - 1] < Score) MenuScene.Scores3[Level - 1] = Score;
 				}
 			}
 		}

@@ -120,7 +120,7 @@ class MenuScene extends Scene
 		
 		_mainChoices.push(new Text("Start"));
 		_mainChoices.push(new Text("Jukebox"));
-		_mainChoices.push(new Text("Lag Calibration"));
+		_mainChoices.push(new Text("Lag Calibration: <0ms>"));
 		for (i in 0..._mainChoices.length) {
 			_mainChoices[i].y = kMainChoiceStartY + kMainChoiceSpacingY * i;
 			_mainChoices[i].x = kMainChoiceStartX;
