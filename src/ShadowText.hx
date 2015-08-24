@@ -56,6 +56,7 @@ class ShadowText extends Entity
 		_text.originY = _orig.originY;
 		_text.visible = _orig.visible;
 		_text.wordWrap = _orig.wordWrap;
+		_text.resizable = _orig.resizable;
 	}
 	
 }
