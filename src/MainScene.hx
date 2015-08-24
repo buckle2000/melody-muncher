@@ -275,6 +275,10 @@ class MainScene extends Scene
 				_levelText.text = "";
 			case 8:
 				_levelText.text = "ARST";
+			case 9:
+				_levelText.text = "ARST";
+			case 10:
+				_levelText.text = "ARST";
 		}
 		_levelText.originX = _levelText.textWidth / 2;
 		

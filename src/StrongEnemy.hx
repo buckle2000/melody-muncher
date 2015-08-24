@@ -13,6 +13,8 @@ class StrongEnemy extends Enemy
 	private var _spritemap:Spritemap = new Spritemap("img/strongenemy.png", 42, 34);
 	private var _spritemapTop:Spritemap = new Spritemap("img/strongenemy.png", 42, 34);
 	private var _spritemapBottom:Spritemap = new Spritemap("img/strongenemy.png", 42, 34);
+	private var _spritemapTopF:Spritemap = new Spritemap("img/strongenemy.png", 42, 34);
+	private var _spritemapBottomF:Spritemap = new Spritemap("img/strongenemy.png", 42, 34);
 	
 	private var _firstHit:Bool = false;
 	private var _topEntity:Entity;
@@ -36,6 +38,16 @@ class StrongEnemy extends Enemy
 		_spritemapBottom.add("walk", [4, 5], 5);
 		_spritemapBottom.add("walk2", [6, 7], 5);
 		_spritemapBottom.play("walk");
+		_spritemapTopF.originX = _spritemapTop.width / 2;
+		_spritemapTopF.originY = _spritemapTop.height - 1;
+		_spritemapTopF.add("walk", [8, 9], 5);
+		_spritemapTopF.add("walk2", [10, 11], 5);
+		_spritemapTopF.play("walk");
+		_spritemapBottomF.originX = _spritemapBottom.width / 2;
+		_spritemapBottomF.originY = _spritemapBottom.height - 1;
+		_spritemapBottomF.add("walk", [8, 9], 5);
+		_spritemapBottomF.add("walk2", [10, 11], 5);
+		_spritemapBottomF.play("walk");
 		
 				layer = 10;
 
@@ -56,10 +68,16 @@ class StrongEnemy extends Enemy
 	{
 		_topEntity = MainScene.Instance.addGraphic(_spritemapTop, layer, 0, 0);
 		_bottomEntity = MainScene.Instance.addGraphic(_spritemapBottom, layer, 0, 0);
+		_topEntity.addGraphic(_spritemapTopF);
+		_bottomEntity.addGraphic(_spritemapBottomF);
 		// TODO: Randomization, etc.
 		
 		super.Reset(beat, left);
 		_spritemap.play("walk");
+		_spritemapTop.play("walk");
+		_spritemapBottom.play("walk");
+		_spritemapTopF.play("walk");
+		_spritemapBottomF.play("walk");
 		_firstHit = false;
 		_spritemap.flipped = !left;
 		_spritemap.updateBuffer();
@@ -80,6 +98,10 @@ class StrongEnemy extends Enemy
 			Sound.Load("sfx/munchstrong1").play();
 			_firstHit = true;
 			_spritemap.play("walk2");
+			_spritemapTop.play("walk2");
+			_spritemapBottom.play("walk2");
+			_spritemapTopF.play("walk2");
+			_spritemapBottomF.play("walk2");
 			// Move back.
 			Beat = Beat + 0.5;
 		}
@@ -90,6 +112,6 @@ class StrongEnemy extends Enemy
 		super.update();
 		
 		Pulse(_spritemap);
-		HandleGhosts(_spritemap, _spritemapTop, _spritemapBottom);
+		HandleGhosts(_spritemap, _spritemapTop, _spritemapBottom, _spritemapTopF, _spritemapBottomF);
 	}
 }

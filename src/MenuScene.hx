@@ -135,13 +135,14 @@ class MenuScene extends Scene
 
 		_songsChoices.push(new Text("Tutorial 1 - Welcome to Melody Muncher"));
 		_songsChoices.push(new Text("Level 1 - arst: " + Scores1[0] + "/" + MaxScores1[0]));
-		_songsChoices.push(new Text("Level 1.5 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
-		_songsChoices.push(new Text("Tutorial 2 - Armored Enemies"));
 		_songsChoices.push(new Text("Level 2 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
+		_songsChoices.push(new Text("Tutorial 2 - Armored Enemies"));
+		_songsChoices.push(new Text("Level 3 - arst: " + Scores1[1] + "/" + MaxScores1[1]));
 		_songsChoices.push(new Text("Tutorial 3 - Split Munch"));
-		_songsChoices.push(new Text("Level 3 - arst: " + Scores1[2] + "/" + MaxScores1[2]));
+		_songsChoices.push(new Text("Level 4 - arst: " + Scores1[2] + "/" + MaxScores1[2]));
 		_songsChoices.push(new Text("Tutorail 4"));
-		_songsChoices.push(new Text("level 4"));
+		_songsChoices.push(new Text("level 5"));
+		_songsChoices.push(new Text("level 6"));
 		_songsChoices.push(new Text("Back"));
 		for (i in 0..._songsChoices.length) {
 			_songsChoices[i].y = kSongsChoiceStartY + kSongsChoiceSpacingY * i;
@@ -325,6 +326,7 @@ class MenuScene extends Scene
 		_songsChoices[6].text = "Level 4 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
 		_songsChoices[7].text = "Tutorial 4 - Teleporters";
 		_songsChoices[8].text = "Level 5 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
+		_songsChoices[9].text = "Level 6 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 
 		for (i in 0..._songsChoices.length) {
 			if (i == _selectedChoice) {
@@ -361,20 +363,23 @@ class MenuScene extends Scene
 						// Tutorial 2
 						HXP.scene = new MainScene(5);
 					case 4:
-						// level 2
+						// level 3
 						HXP.scene = new MainScene(2);
 					case 5:
 						// Tutorial 3
 						HXP.scene = new MainScene(6);
 					case 6:
-						// level 3
+						// level 4
 						HXP.scene = new MainScene(3);
 					case 7:
 						// tutorial 4
 						HXP.scene = new MainScene(7);
 					case 8:
-						// level 4
+						// level 5
 						HXP.scene = new MainScene(8);
+					case 9:
+						// level 6
+						HXP.scene = new MainScene(10);
 					default:
 						trace("reawftnuynoaw");
 				}

@@ -49,7 +49,10 @@ class JukeboxScene extends Scene
 	Sound.Load("sfx/level6"),
 	Sound.Load("sfx/level7"),
 	Sound.Load("sfx/level8"),
-	Sound.Load("sfx/level9")
+	Sound.Load("sfx/level9"),
+	Sound.Load("sfx/level10"),
+	Sound.Load("sfx/intro"),
+	Sound.Load("sfx/menu")
 	];
 	
 	private var _descriptions:Array<String> = [
@@ -61,7 +64,10 @@ class JukeboxScene extends Scene
 	"arst6",
 	"arst7",
 	"arst8",
-	"arst9"
+	"arst9",
+	"arst10",
+	"arst11",
+	"arst12"
 	];
 	
 	override public function begin() 
@@ -90,6 +96,10 @@ class JukeboxScene extends Scene
 		_choices.push(new Text("Song 6"));
 		_choices.push(new Text("Song 7"));
 		_choices.push(new Text("Song 8"));
+		_choices.push(new Text("Song 9"));
+		_choices.push(new Text("Song 10"));
+		_choices.push(new Text("Song 11"));
+		_choices.push(new Text("Song 12"));
 		_choices.push(new Text("Back"));
 		for (i in 0..._choices.length) {
 			_choices[i].y = kChoiceStartY + kChoiceSpacingY * i;

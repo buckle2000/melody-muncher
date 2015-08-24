@@ -84,21 +84,24 @@ class Enemy extends Entity
 		}
 	}
 	
-	private function HandleGhosts(spritemap:Spritemap, spritemapTop:Spritemap, spritemapBottom:Spritemap)
+	private function HandleGhosts(spritemap:Spritemap, spritemapTop:Spritemap, spritemapBottom:Spritemap,
+								  spritemapTopF:Spritemap, spritemapBottomF:Spritemap)
 	{
-		var ghostBeats:Float = 0.5;
-		var distance:Float = 50.0;
+		var ghostBeats:Float = 0.4;
+		var distance:Float = 40.0;
 		
 		var beatsLeft:Float = BeatsLeft();
 		
+		spritemapBottom.scale = 1;
+		spritemapTop.scale = 1;
 		spritemapBottom.x = Left ? MainScene.LeftPosition : MainScene.RightPosition;
 		spritemapTop.x = Left ? MainScene.LeftPosition : MainScene.RightPosition;
 		if (beatsLeft < 0.0) {
 			spritemapTop.alpha -= 0.1;
 			spritemapBottom.alpha -= 0.1;
 		} else {
-			spritemapTop.alpha = 1.0 - beatsLeft;
-			spritemapBottom.alpha = 1.0 - beatsLeft;
+			spritemapTop.alpha = (1.0 - beatsLeft) * 0.8;
+			spritemapBottom.alpha = (1.0 - beatsLeft) * 0.8;
 		}
 		spritemapTop.y = beatsLeft * distance;
 		if (spritemapTop.y < 0) {
@@ -110,5 +113,20 @@ class Enemy extends Entity
 		spritemapBottom.y += MainScene.FloorY;
 		spritemapTop.flipped = spritemap.flipped;
 		spritemapBottom.flipped = spritemap.flipped;
+
+		
+		if (beatsLeft < 0.1 && beatsLeft > -0.1) {
+			spritemapBottomF.visible = true;
+			spritemapTopF.visible = true;
+			spritemapBottomF.x = spritemapBottom.x;
+			spritemapBottomF.y = spritemapBottom.y;
+			spritemapTopF.x = spritemapTop.x;
+			spritemapTopF.y = spritemapTop.y;
+			spritemapBottomF.flipped = spritemapBottom.flipped;
+			spritemapTopF.flipped = spritemapTop.flipped;
+		} else {
+			spritemapBottomF.visible = false;
+			spritemapTopF.visible = false;
+		}
 	}
 }

@@ -15,6 +15,8 @@ class BasicEnemy extends Enemy
 	private var _spritemapBottom:Spritemap = new Spritemap("img/basicenemy.png", 26, 26);
 	private var _topEntity:Entity;
 	private var _bottomEntity:Entity;
+	private var _spritemapTopF:Spritemap = new Spritemap("img/basicenemy.png", 26, 26);
+	private var _spritemapBottomF:Spritemap = new Spritemap("img/basicenemy.png", 26, 26);
 
 	public function new()
 	{
@@ -31,6 +33,14 @@ class BasicEnemy extends Enemy
 		_spritemapBottom.originY = _spritemapBottom.height - 1;
 		_spritemapBottom.add("walk", [2, 3], 5);
 		_spritemapBottom.play("walk");
+		_spritemapTopF.originX = _spritemapTop.width / 2;
+		_spritemapTopF.originY = _spritemapTop.height - 1;
+		_spritemapTopF.add("walk", [4, 5], 5);
+		_spritemapTopF.play("walk");
+		_spritemapBottomF.originX = _spritemapBottom.width / 2;
+		_spritemapBottomF.originY = _spritemapBottom.height - 1;
+		_spritemapBottomF.add("walk", [4, 5], 5);
+		_spritemapBottomF.play("walk");
 		layer = 10;
 	}
 	
@@ -55,6 +65,8 @@ class BasicEnemy extends Enemy
 		_spritemap.updateBuffer();
 		_topEntity = MainScene.Instance.addGraphic(_spritemapTop, layer, 0, 0);
 		_bottomEntity = MainScene.Instance.addGraphic(_spritemapBottom, layer, 0, 0);
+		_topEntity.addGraphic(_spritemapTopF);
+		_bottomEntity.addGraphic(_spritemapBottomF);
 	}
 	
 	override public function Hit():Void 
@@ -72,6 +84,6 @@ class BasicEnemy extends Enemy
 		super.update();
 		
 		Pulse(_spritemap);
-		HandleGhosts(_spritemap, _spritemapTop, _spritemapBottom);
+		HandleGhosts(_spritemap, _spritemapTop, _spritemapBottom, _spritemapTopF, _spritemapBottomF);
 	}
 }
