@@ -105,6 +105,12 @@ class MenuScene extends Scene
 		ShadowText.Create(title2);
 		ShadowText.Create(title3);
 		
+		var tinter:Image = new Image("img/white.png");
+		tinter.scale = 1100;
+		tinter.color = 0x000000;
+		tinter.alpha = 0.25;
+		addGraphic(tinter, 10);
+		
 		_music.loop(Song.kMusicVolume);
 		
 		_mainChoices.push(new Text("Start"));
@@ -120,8 +126,7 @@ class MenuScene extends Scene
 		}
 
 		_difficultyChoices.push(new Text("Normal - For beginners"));
-		_difficultyChoices.push(new Text("Hard - For rhythm gamers"));
-		_difficultyChoices.push(new Text("Expert - For crazy people"));
+		_difficultyChoices.push(new Text("Expert - For rhythm gamers (coming soon!)"));
 		_difficultyChoices.push(new Text("Back to Main Menu"));
 		for (i in 0..._difficultyChoices.length) {
 			_difficultyChoices[i].y = kDifficultyChoiceStartY + kDifficultyChoiceSpacingY * i;
@@ -277,22 +282,20 @@ class MenuScene extends Scene
 					Sound.Load("sfx/cursor").play();
 					_state = "songs";
 					Difficulty = _selectedChoice;
+					_selectedChoice = 0;
 				case 1:
-					// hard
-					Sound.Load("sfx/cursor").play();
-					_state = "songs";
-					Difficulty = _selectedChoice;
-				case 2:
 					// expert
 					Sound.Load("sfx/cursor").play();
-					_state = "songs";
-					Difficulty = _selectedChoice;
-				case 3:
+					//_state = "songs";
+					//_selectedChoice = 0;
+					
+					//Difficulty = _selectedChoice;
+				case 2:
 					// back
 					Sound.Load("sfx/cursor").play();
+					_selectedChoice = 0;
 					_state = "main";
 			}
-			_selectedChoice = 0;
 		}
 		if (Input.pressed(Key.ESCAPE)) {
 			_state = "main";
