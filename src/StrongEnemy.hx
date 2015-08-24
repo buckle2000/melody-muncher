@@ -59,7 +59,7 @@ class StrongEnemy extends Enemy
 		MainScene.Instance.remove(_topEntity);
 		MainScene.Instance.remove(_bottomEntity);
 		
-		for (i in 0...4) {
+		for (i in 0...6) {
 			MainScene.Instance.MainEmitter.emit(Left ? "2" : "2r", x, y);
 		}
 	}

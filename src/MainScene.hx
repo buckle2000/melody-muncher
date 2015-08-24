@@ -83,8 +83,14 @@ class MainScene extends Scene
 		Level = level;
 		
 		MainEmitter.newType("tiny", [0]);
-		MainEmitter.setMotion("tiny", 0, 30, 10 / 60.0, 360, 50, 10 / 60.0);
+		MainEmitter.setMotion("tiny", 0, 30, 10 / 60.0, 360, 50, 20 / 60.0);
 		MainEmitter.setAlpha("tiny");
+		MainEmitter.newType("tiny2", [8]);
+		MainEmitter.setMotion("tiny2", 0, 30, 10 / 60.0, 360, 50, 10 / 60.0);
+		MainEmitter.setAlpha("tiny2");
+		MainEmitter.newType("tiny3", [9]);
+		MainEmitter.setMotion("tiny3", 0, 30, 10 / 60.0, 360, 50, 10 / 60.0);
+		MainEmitter.setAlpha("tiny3");
 		MainEmitter.newType("bad", [1]);
 		MainEmitter.setMotion("bad", 90, 10, 30 / 60.0, 0, 0, 0);
 		MainEmitter.setAlpha("bad");

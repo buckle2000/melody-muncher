@@ -52,8 +52,12 @@ class Enemy extends Entity
 		MainScene.Shake(1, 3);
 		
 		// Particles.
-		for (i in 0...30) {
+		for (i in 0...25) {
 			MainScene.Instance.MainEmitter.emit("tiny", x, y);
+		}
+		for (i in 0...5) {
+			MainScene.Instance.MainEmitter.emit("tiny2", x, y);
+			MainScene.Instance.MainEmitter.emit("tiny3", x, y);
 		}
 		
 		// Overridden in base classes.
@@ -62,6 +66,7 @@ class Enemy extends Entity
 	public function Attack():Void
 	{
 		MainScene.Instance.ThisPlayer.Flash(10);
+		MainScene.Instance.MainEmitter.emit("bad", MainScene.Instance.ThisPlayer.x - 1, MainScene.Instance.ThisPlayer.y - 50);
 		Sound.Load("sfx/hit").play();
 		Destroy();
 		MainScene.Instance.ResetChain();
