@@ -115,6 +115,7 @@ class MenuScene extends Scene
 		
 		_mainChoices.push(new Text("Start"));
 		_mainChoices.push(new Text("Jukebox"));
+		_mainChoices.push(new Text("Lag Calibration"));
 		for (i in 0..._mainChoices.length) {
 			_mainChoices[i].y = kMainChoiceStartY + kMainChoiceSpacingY * i;
 			_mainChoices[i].x = kMainChoiceStartX;
@@ -190,9 +191,6 @@ class MenuScene extends Scene
 		for (choice in _mainChoices) {
 			choice.visible = true;
 		}
-		_cursor.x = - _mainChoices[_selectedChoice].textWidth / 2 + _mainChoices[_selectedChoice].x;
-		_cursor.y = kMainChoiceStartY + _selectedChoice * kMainChoiceSpacingY;
-
 		for (i in 0..._mainChoices.length) {
 			if (i == _selectedChoice) {
 				_mainChoices[i].color = 0xFFFF00;
@@ -200,6 +198,14 @@ class MenuScene extends Scene
 				_mainChoices[i].color = 0xFFFFFF;
 			}
 		}
+		
+		_mainChoices[2].text = "Lag Calibration:   " + Song.LagCalibration + "ms";
+		if (_selectedChoice == 2) {
+			_mainChoices[2].text = "Lag Calibration: < " + Song.LagCalibration + "ms >";
+		}
+
+		_cursor.x = - _mainChoices[_selectedChoice].originX + _mainChoices[_selectedChoice].x;
+		_cursor.y = kMainChoiceStartY + _selectedChoice * kMainChoiceSpacingY;
 
 		if (_fadeTimer > 0) {
 			// we are fading, just do the fade and nothing else.
@@ -243,6 +249,17 @@ class MenuScene extends Scene
 					// jukebox
 					_fadeTimer++;
 					Sound.Load("sfx/startgame").play();
+			}
+		}
+		
+		if (_selectedChoice == 2) {
+			if (Input.pressed(Key.LEFT)) {
+				Sound.Load("sfx/cursor").play();
+				Song.LagCalibration -= 50;
+			}
+			if (Input.pressed(Key.RIGHT)) {
+				Sound.Load("sfx/cursor").play();
+				Song.LagCalibration += 50;
 			}
 		}
 	}

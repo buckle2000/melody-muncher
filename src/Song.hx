@@ -14,7 +14,7 @@ class Song
 	public static inline var kMusicVolume:Float = 0.8;
 	
 	// TODO: lag calibration in menu
-	public static var LagCalibration:Float = -0.05;
+	public static var LagCalibration:Int = 0;
 	
 	// For one side of the timing window.
 	public static inline var kDefaultTimingWindow:Float = 0.2;
@@ -396,7 +396,7 @@ class Song
 	public function CurrentTime():Float
 	{
 		// Compensate for lag.
-		return _sfx.position - LagCalibration + _addedLength;
+		return _sfx.position - LagCalibration / 1000.0 + _addedLength;
 	}
 	
 	public function CurrentBeat():Float
