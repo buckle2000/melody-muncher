@@ -317,16 +317,17 @@ class MenuScene extends Scene
 		} else {
 			trace("awftnuyawfotn");
 		}
+		
 		_songsChoices[0].text = "Tutorial 1 - Welcome to Melody Muncher";
-		_songsChoices[1].text = "Level 1 - arst (Score: " + scoreArray[0] + "/" + maxScoreArray[0] + ")";
-		_songsChoices[2].text = "Level 2 - arst (Score: " + scoreArray[8] + "/" + maxScoreArray[8] + ")";
+		_songsChoices[1].text = "Level 1 - Born to be Free (Score: " + scoreArray[0] + "/" + maxScoreArray[0] + ")";
+		_songsChoices[2].text = "Level 2 - Solar Beam (Score: " + scoreArray[8] + "/" + maxScoreArray[8] + ")";
 		_songsChoices[3].text = "Tutorial 2 - Armored Enemies";
-		_songsChoices[4].text = "Level 3 - arst (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
+		_songsChoices[4].text = "Level 3 - Gonna Cut You Up (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
 		_songsChoices[5].text = "Tutorial 3 - Split Munch";
-		_songsChoices[6].text = "Level 4 - arst (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
+		_songsChoices[6].text = "Level 4 - Standing Here Along (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
 		_songsChoices[7].text = "Tutorial 4 - Teleporters";
-		_songsChoices[8].text = "Level 5 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
-		_songsChoices[9].text = "Level 6 - arst (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
+		_songsChoices[8].text = "Level 5 - Flower Fang (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
+		_songsChoices[9].text = "Level 6 - Undying (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 
 		for (i in 0..._songsChoices.length) {
 			if (i == _selectedChoice) {

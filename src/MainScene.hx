@@ -259,12 +259,14 @@ class MainScene extends Scene
 		
 		switch(Level)
 		{
+		
+			
 			case 1:
-				_levelText.text = "ARST";
+				_levelText.text = "DDRKirby(ISQ) - Born to be Free";
 			case 2:
-				_levelText.text = "ARST";
+				_levelText.text = "DDRKirby(ISQ) - Solar Beam";
 			case 3:
-				_levelText.text = "ARST";
+				_levelText.text = "DDRKirby(ISQ) - Gonna Cut You Up";
 			case 4:
 				_levelText.text = "";
 			case 5:
@@ -274,11 +276,11 @@ class MainScene extends Scene
 			case 7:
 				_levelText.text = "";
 			case 8:
-				_levelText.text = "ARST";
+				_levelText.text = "DDRKirby(ISQ) - Standing Here Alone";
 			case 9:
-				_levelText.text = "ARST";
+				_levelText.text = "DDRKirby(ISQ) - Flower Fang";
 			case 10:
-				_levelText.text = "ARST";
+				_levelText.text = "DDRKirby(ISQ) - Undying";
 		}
 		_levelText.originX = _levelText.textWidth / 2;
 		
