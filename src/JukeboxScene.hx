@@ -48,10 +48,10 @@ class JukeboxScene extends Scene
 	Sound.Load("sfx/level6"),
 	Sound.Load("sfx/level7"),
 	Sound.Load("sfx/level1"),
-	Sound.Load("sfx/level8"),
+	Sound.Load("sfx/level9"),
 	Sound.Load("sfx/level2"),
 	Sound.Load("sfx/level3"),
-	Sound.Load("sfx/level9"),
+	Sound.Load("sfx/level8"),
 	Sound.Load("sfx/level10")
 	];
 	
