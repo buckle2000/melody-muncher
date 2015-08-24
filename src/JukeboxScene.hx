@@ -102,7 +102,7 @@ class JukeboxScene extends Scene
 
 "Undying (Level 6)\n" +
 "Working time: 51 minutes\n\n" +
-"The last song that I'm writing for the 48-hour compo version of Melody Muncher.  I tried to strike a balance between making it a nice challenge vs. still making it accessible for people who are just coming from Level 5 (in other words, I didn't go all-out on the difficulty like I did with Ripple Runner Deluxe's final stage).  I upped the tempo and ended up with a spooky melody for the intro; everything else just fell into place from here, with the tritone chord progression and the big bassline.  I was also interested in using a drum solo for the enemy rhythms, so that made its way into this song as well.  Whelp, that's the last song (for now!)...hopefully you've enjoyed them!",
+"The last song that I'm writing for the 48-hour compo version of Melody Muncher.  I tried to strike a balance between making it a nice challenge vs. still making it accessible for people who are just coming from Level 5 (in other words, I didn't go all-out on the difficulty like I did with Ripple Runner Deluxe's final stage).  I upped the tempo and started things off with an awesome NES drumloop, sampled from virt/Jake Kaufman's Shovel Knight OST (go check it out if you haven't!).  I ended up with a spooky melody for the intro; everything else just fell into place from here, with the tritone chord progression and the big bassline.  I was also interested in using a drum solo for the enemy rhythms, so that made its way into this song as well.  Whelp, that's the last song (for now!)...hopefully you've enjoyed them!",
 ];
 	
 	override public function begin() 
