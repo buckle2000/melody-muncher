@@ -5,7 +5,7 @@ import com.haxepunk.utils.Key;
 
 class Main extends Engine
 {
-	public static inline var kVersion:String = "v0.00";
+	public static inline var kVersion:String = "v1.00";
 
 	override public function init()
 	{
@@ -19,8 +19,8 @@ class Main extends Engine
 		HXP.screen.smoothing = false;
 		//HXP.scene = new MenuScene();
 		//HXP.scene = new JukeboxScene();
-		HXP.scene = new MainScene(10);
-		//HXP.scene = new IntroScene();
+		//HXP.scene = new MainScene(10);
+		HXP.scene = new IntroScene();
 		
 		Input.define("up", [Key.UP]);
 		Input.define("left", [Key.LEFT]);

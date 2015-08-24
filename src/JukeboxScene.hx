@@ -25,8 +25,8 @@ class JukeboxScene extends Scene
 
 	var _choices:Array<Text> = new Array<Text>();
 	static inline var kChoiceStartX = 250;
-	static inline var kChoiceStartY = 50;
-	static inline var kChoiceSpacingY = 15;
+	static inline var kChoiceStartY = 10;
+	static inline var kChoiceSpacingY = 12;
 	
 	private var _description:Text;
 
@@ -41,34 +41,69 @@ class JukeboxScene extends Scene
 	var _playingMusic:Sfx;
 	
 	private var _musics:Array<Sfx> = [
-	Sound.Load("sfx/level1"),
-	Sound.Load("sfx/level2"),
-	Sound.Load("sfx/level3"),
+	Sound.Load("sfx/intro"),
+	Sound.Load("sfx/menu"),
 	Sound.Load("sfx/level4"),
 	Sound.Load("sfx/level5"),
 	Sound.Load("sfx/level6"),
 	Sound.Load("sfx/level7"),
+	Sound.Load("sfx/level1"),
 	Sound.Load("sfx/level8"),
+	Sound.Load("sfx/level2"),
+	Sound.Load("sfx/level3"),
 	Sound.Load("sfx/level9"),
-	Sound.Load("sfx/level10"),
-	Sound.Load("sfx/intro"),
-	Sound.Load("sfx/menu")
+	Sound.Load("sfx/level10")
 	];
 	
 	private var _descriptions:Array<String> = [
-	"arst1",
-	"arst2",
-	"arst3",
-	"arst4",
-	"arst5",
-	"arst6",
-	"arst7",
-	"arst8",
-	"arst9",
-	"arst10",
-	"arst11",
-	"arst12"
-	];
+"Ms. Melody (Intro Sequence)\n" +
+"Working time: 7 minutes\n\n" +
+"I needed a little ditty for the opening cutscene, so I borrowed the melody from the title theme and added some arpeggios and blips underneath it.  In hindsight I would rather have not had the intro ditty match the very first part of the menu exactly, but I guess it still works out alright.",
+
+"Sunny Day (Title Theme)\n" +
+"Working time: 27 minutes\n\n" +
+"Uncharacteristically, I didn't have that much trouble writing a happy and laidback menu theme -- it was a bit easier than I thought it might be.  I guess you could consider the opening riff here the main \"motif\" of Melody Muncher, but it only shows up here and in the intro, so it's not really as relevant in this soundtrack.",
+
+"Let's Learn, Part 1 (Tutorial 1)\n" +
+"Working time: 6 minutes\n\n" +
+"A short and simple repeating song for the tutorial scene, so I came up with this 4-bar loop, using basic TR909 drums, then sprinkled on some chippy beeps for the enemy sounds.",
+
+"Let's Learn, Part 2 (Tutorial 2)\n" +
+"Working time: 4 minutes\n\n" +
+"I had the idea here that I would just add on an element to the tutorial music each time I introduced a new element; eventually you'd have an entire song with chords and pads and all that!",
+
+"Let's Learn, Part 3 (Tutorial 3)\n" +
+"Working time: 3 minutes\n\n" +
+"Now adding some driving motion using a 25% pulse wave bass...",
+
+"Let's Learn, Part 4 (Tutorial 4)\n" +
+"Working time: 2 minutes\n\n" +
+"And now some more melodic material.  Huzzah!",
+
+"Born to Be Free (Level 1)\n" +
+"Working time: 1 hour 2 minutes\n\n" +
+"The first song I wrote for the entire game.  It came out quite a lot more moody and intense than I would have imagined given the style of the game, but I have a tendency to write this kind of music, so I guess it can't really be helped.  The music for this game was much quicker to write than the Ripple Runner OST simply because inputting enemy charts into the game was much easier this time (Ripple Runner level programming was ridiculously hacky).  The experience I got from doing Ripple Runner and Rhythm Gunner also helped me out as I already knew how to use beeps, arps, and melodies to fit the rhythms of the game.",
+
+"Solar Beam (Level 2)\n" +
+"Working time: 52 minutes\n\n" +
+"I wrote this song later on, after getting some feedback that the difficulty jump from level 1 to level 3 might be a bit too large for new players.  The goal was to write a faster song, so that you could get really comfortable with basic green enemies, before I strat introducing other concepts in Level 3 (which is slower).  The increased tempo apparently inspired me to make a super-driving song, that climaxes into a full-blown chorus, complete with sidechained pads and epic arp.  Well, sure!  I'll take that.  Trying to mix and balance the chorus was admittedly pretty difficult -- there's a lot of stuff going on -- but I did the best I could in a short timeframe.",
+
+"Gonna Cut You Up (Level 3)\n" +
+"Working time: 43 minutes\n\n" +
+"The second song I wrote.  I tried to use a lot of eighth-note patterns to match up with the red enemies, which are introduced in this stage.  It's worth noting that having all of the rhythms fall on downbeats (at least, for Normal mode) affected my compositional process in an interesting way, as I was forced to shy away from using syncopations in my melodies when possible.",
+
+"Standing Here Alone (Level 4)\n" +
+"Working time: 48 minutes\n\n" +
+"Trying to use echoey arpeggio patterns to highlight the teleporting of the blue enemies, which are introduced here.  The octave-arp synth that is used for the beginning and end here really harks back to Ripple Runner; I feel like I'm not the only one who will be making that association here.",
+
+"Flower Fang (Level 5)\n" +
+"Working time: 1 hour 7 minutes\n\n" +
+"Somehow I ended up with this monster of a song, complete with massive sidechained bassline.  Again I almost feel like the music I ended up writing is a little TOO intense for the graphic style, but sometimes the music just kinda does what it wants!  I will say that this soundtrack in general flowed really smoothly and I had almost no problems with any of the writing.  I guess it probably shows in the sheer quantity of music that I was able to write (though to be fair, these songs are all on the short side).",
+
+"Undying (Level 6)\n" +
+"Working time: 51 minutes\n\n" +
+"The last song that I'm writing for the 48-hour compo version of Melody Muncher.  I tried to strike a balance between making it a nice challenge vs. still making it accessible for people who are just coming from Level 5 (in other words, I didn't go all-out on the difficulty like I did with Ripple Runner Deluxe's final stage).  I upped the tempo and ended up with a spooky melody for the intro; everything else just fell into place from here, with the tritone chord progression and the big bassline.  I was also interested in using a drum solo for the enemy rhythms, so that made its way into this song as well.  Whelp, that's the last song (for now!)...hopefully you've enjoyed them!",
+];
 	
 	override public function begin() 
 	{
@@ -88,18 +123,18 @@ class JukeboxScene extends Scene
 		tinter.alpha = 0.5;
 		addGraphic(tinter, 10);
 		
-		_choices.push(new Text("Song 1"));
-		_choices.push(new Text("Song 2"));
-		_choices.push(new Text("Song 3"));
-		_choices.push(new Text("Song 4"));
-		_choices.push(new Text("Song 5"));
-		_choices.push(new Text("Song 6"));
-		_choices.push(new Text("Song 7"));
-		_choices.push(new Text("Song 8"));
-		_choices.push(new Text("Song 9"));
-		_choices.push(new Text("Song 10"));
-		_choices.push(new Text("Song 11"));
-		_choices.push(new Text("Song 12"));
+		_choices.push(new Text("Ms. Melody"));
+		_choices.push(new Text("Sunny Day"));
+		_choices.push(new Text("Let's Learn (Part 1)"));
+		_choices.push(new Text("Let's Learn (Part 2)"));
+		_choices.push(new Text("Let's Learn (Part 3)"));
+		_choices.push(new Text("Let's Learn (Part 4)"));
+		_choices.push(new Text("Born to be Free"));
+		_choices.push(new Text("Solar Beam"));
+		_choices.push(new Text("Gonna Cut You Up"));
+		_choices.push(new Text("Standing Here Alone"));
+		_choices.push(new Text("Flower Fang"));
+		_choices.push(new Text("Undying"));
 		_choices.push(new Text("Back"));
 		for (i in 0..._choices.length) {
 			_choices[i].y = kChoiceStartY + kChoiceSpacingY * i;
@@ -112,7 +147,7 @@ class JukeboxScene extends Scene
 		}
 		
 		_description = new Text("", 0, 0, HXP.width - 40, 1000);
-		_description.y = _choices[_choices.length - 1].y + 20;
+		_description.y = _choices[_choices.length - 1].y + 10;
 		_description.x = 20;
 		_description.wordWrap = true;
 		_description.resizable = false;
