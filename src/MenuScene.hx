@@ -330,7 +330,7 @@ class MenuScene extends Scene
 		_songsChoices[6].text = "Level 4 - Standing Here Along (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
 		_songsChoices[7].text = "Tutorial 4 - Teleporters";
 		_songsChoices[8].text = "Level 5 - Flower Fang (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
-		_songsChoices[9].text = "Level 6 - Undying (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
+		_songsChoices[9].text = "Level 6 - Undying (Score: " + scoreArray[9] + "/" + maxScoreArray[9] + ")";
 
 		for (i in 0..._songsChoices.length) {
 			if (i == _selectedChoice) {
