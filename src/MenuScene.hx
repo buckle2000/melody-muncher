@@ -384,7 +384,7 @@ class MenuScene extends Scene
 		_songsChoices[3].text = "Tutorial 2 - Armored Enemies";
 		_songsChoices[4].text = "Level 3 - Gonna Cut You Up (Score: " + scoreArray[1] + "/" + maxScoreArray[1] + ")";
 		_songsChoices[5].text = "Tutorial 3 - Split Munch";
-		_songsChoices[6].text = "Level 4 - Standing Here Along (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
+		_songsChoices[6].text = "Level 4 - Standing Here Alone (Score: " + scoreArray[2] + "/" + maxScoreArray[2] + ")";
 		_songsChoices[7].text = "Tutorial 4 - Teleporters";
 		_songsChoices[8].text = "Level 5 - Flower Fang (Score: " + scoreArray[7] + "/" + maxScoreArray[7] + ")";
 		_songsChoices[9].text = "Level 6 - Undying (Score: " + scoreArray[9] + "/" + maxScoreArray[9] + ")";
